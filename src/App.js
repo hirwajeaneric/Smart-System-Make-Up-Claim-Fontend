@@ -6,7 +6,7 @@ import LandingPage from './pages/LandingPage';
 import AuthentincationPage from './pages/auth';
 import Signup from './pages/auth/Signup';
 import Signin from './pages/auth/Signin';
-import ResetPassword from './pages/auth/RequestPasswordReset';
+import ResetPassword from './pages/auth/ResetPassword';
 import RequestPasswordReset from './pages/auth/RequestPasswordReset';
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
             <Route path='signin' element={<Signin />} />
             <Route path='signup' element={<Signup />} />
             <Route path='forgot-password' element={<RequestPasswordReset />} />
-            <Route path='reset-password' element={<ResetPassword />} />
+            <Route path='reset-password/:token/:userId' element={<ResetPassword />} />
           </Route>
 
           <Route path='/:userType/'>
