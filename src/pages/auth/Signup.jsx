@@ -14,6 +14,7 @@ import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { Helmet } from 'react-helmet-async';
+import Apis from '../../API/Apis';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -105,7 +106,7 @@ const Signup = () => {
 
     setProgress({ value: 'Signing up ...', disabled: true });
 
-    axios.post(`http://localhost:5555/api/v1/ssmec/user/signup/`, data)
+    axios.post(Apis.userApis.signUp, data)
     .then(response => {
       setTimeout(()=>{
         if (response.status === 201) {

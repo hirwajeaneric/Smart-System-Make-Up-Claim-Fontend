@@ -2,6 +2,7 @@ import { Button, TextField } from '@mui/material';
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { AuthenticationPageContainer, AuthFormContainer, InnerContainer } from '../../components/styled-components/authenticationPages'
+import Apis from '../../API/Apis';
 
 import InputLabel from '@mui/material/InputLabel';
 import IconButton from '@mui/material/IconButton';
@@ -68,40 +69,41 @@ const Signin = () => {
 
     const { email, registrationNumber, password } = formData;
     
-    var link = `http://localhost:5555/api/v1/ssmec/user/`;
+    var link = '';
     if (params.userType === 'std') {
       data.registrationNumber = parseInt(registrationNumber);
       data.role = sysUser;
-      link = link+'studentSignIn';  
+      link = Apis.userApis.signInAsStudent  
     } else if (params.userType === 'lec') {
       data.email = email
       data.role = sysUser;
-      link = link+'signin';
+      link = Apis.userApis.signInAsOtherUser;
     } else if (params.userType === 'hod') {
       data.email = email
       data.role = sysUser;
-      link = link+'signin';
+      link = Apis.userApis.signInAsOtherUser;
     } else if (params.userType === 'reg') {
       data.email = email
       data.role = sysUser;
-      link = link+'signin';
+      link = Apis.userApis.signInAsOtherUser;
     } else if (params.userType === 'exo') {
       data.email = email
       data.role = sysUser;
-      link = link+'signin';
+      link = Apis.userApis.signInAsOtherUser;
     } else if (params.userType === 'dsd') {
       data.email = email
       data.role = sysUser;
-      link = link+'signin';
+      link = Apis.userApis.signInAsOtherUser;
     } else if (params.userType === 'acc') {
       data.email = email
       data.role = sysUser;
-      link = link+'signin';
+      link = Apis.userApis.signInAsOtherUser;
     } 
     data.password = password;
 
     console.log(data);
-
+    console.log('Calling Api: '+link);
+    
     if (data.role === 'Student' && isNaN(data.registrationNumber)) {
       setResponseMessage({ message: 'Wrong input, registration number should contain digits only.', severity: 'error' });
       setOpen(true);

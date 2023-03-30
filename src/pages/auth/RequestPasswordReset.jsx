@@ -2,14 +2,8 @@ import { Button, TextField } from '@mui/material';
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { AuthenticationPageContainer, AuthFormContainer, InnerContainer } from '../../components/styled-components/authenticationPages'
+import Apis from '../../API/Apis';
 
-import InputLabel from '@mui/material/InputLabel';
-import IconButton from '@mui/material/IconButton';
-import InputAdornment from '@mui/material/InputAdornment';
-import FilledInput from '@mui/material/FilledInput';
-import FormControl from '@mui/material/FormControl';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { Helmet } from 'react-helmet-async';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
@@ -25,9 +19,8 @@ const RequestPasswordReset = () => {
   const params = useParams();
   
   // States
-  const [showPassword, setShowPassword] = React.useState(false);
   const [sysUser, setSysUser] = useState('');
-  const [formData, setFormData] = useState({ email: '', registrationNumber: 0, password: '' });
+  const [formData, setFormData] = useState({ email: '', role: '' });
   const [progress, setProgress] = useState({ value: '', disabled: false});
   const [open, setOpen] = useState(false);
   const [responseMessage, setResponseMessage] = useState({ message: '', severity: ''})
@@ -59,97 +52,61 @@ const RequestPasswordReset = () => {
 
   // Functions
   const handleChange = ({currentTarget: input}) => { setFormData({...formData, [input.name]: input.value}) };
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-  const handleMouseDownPassword = (event) => { event.preventDefault() };
-
+  
+  // Submit function
   const submitForm = (e) => {
     e.preventDefault();
     const data = {};
 
-    const { email, registrationNumber, password } = formData;
+    const { email } = formData;
     
-    var link = `http://localhost:5555/api/v1/ssmec/user/`;
+    // Setting up the url to call
+    var link = Apis.userApis.requestPasswordReset;
+    
+    //  Setting user data according to users
     if (params.userType === 'std') {
-      data.registrationNumber = parseInt(registrationNumber);
-      data.role = sysUser;
-      link = link+'studentSignIn';  
+      data.email = email
+      data.role = sysUser;  
     } else if (params.userType === 'lec') {
       data.email = email
       data.role = sysUser;
-      link = link+'signin';
     } else if (params.userType === 'hod') {
       data.email = email
       data.role = sysUser;
-      link = link+'signin';
     } else if (params.userType === 'reg') {
       data.email = email
       data.role = sysUser;
-      link = link+'signin';
     } else if (params.userType === 'exo') {
       data.email = email
       data.role = sysUser;
-      link = link+'signin';
     } else if (params.userType === 'dsd') {
       data.email = email
       data.role = sysUser;
-      link = link+'signin';
     } else if (params.userType === 'acc') {
       data.email = email
       data.role = sysUser;
-      link = link+'signin';
     } 
-    data.password = password;
 
-    console.log(data);
-
-    if (data.role === 'Student' && isNaN(data.registrationNumber)) {
-      setResponseMessage({ message: 'Wrong input, registration number should contain digits only.', severity: 'error' });
-      setOpen(true);
-      return;
-    } else if (data.role !== 'Student' && typeof data.email !== 'string') {
-      setResponseMessage({ message: 'Wrong input.', severity: 'error' });
+    // Validation 
+    if (data.email === '') {
+      setResponseMessage({ message: 'Email must be provided', severity: 'error' });
       setOpen(true);
       return;
     } else {
-      setProgress({ value: 'Signing in ...', disabled: true});
-
+      // Set progress message
+      setProgress({ value: 'Sending request ...', disabled: true});
+      // Api call
       axios.post(link, data)
       .then(response => {
         setTimeout(()=>{
           if (response.status === 200) {
-            const { token, ...userInfo } = response.data.user;
+            setResponseMessage({ message: response.data.message, severity: 'success' });
+            setOpen(true); 
             
+            // Reset inputs to normal
             setProgress({ value: '', disabled: false });
-  
-            if (userInfo.role === 'Student') {
-              localStorage.setItem('studentInfo', JSON.stringify(userInfo));
-              localStorage.setItem('studentToken', token);
-              window.location.replace('/std/home/');
-            } else if (userInfo.role === 'Lecturer') {
-              localStorage.setItem('lecturerInfo', JSON.stringify(userInfo));
-              localStorage.setItem('lecturerToken', token);
-              window.location.replace('/lec/home/');
-            } else if (userInfo.role === 'Hod/Dean') {
-              localStorage.setItem('hodDeanInfo', JSON.stringify(userInfo));
-              localStorage.setItem('hodDeanToken', token);
-              window.location.replace('/hod/home/');
-            } else if (userInfo.role === 'Registration officer') {
-              localStorage.setItem('registrationOfficeInfo', JSON.stringify(userInfo));
-              localStorage.setItem('registrationOfficeToken', token);
-              window.location.replace('/reg/home/');
-            } else if (userInfo.role === 'Accountant') {
-              localStorage.setItem('accountantInfo', JSON.stringify(userInfo));
-              localStorage.setItem('accountantToken', token);
-              window.location.replace('/acc/home/');
-            } else if (userInfo.role === 'Director of student discipline') {
-              localStorage.setItem('directorOfStudentDisciplineInfo', JSON.stringify(userInfo));
-              localStorage.setItem('directorOfStudentDisciplineToken', token);
-              window.location.replace('/dsd/home/');
-            } else if (userInfo.role === 'Examination officer') {
-              localStorage.setItem('examinationOfficerInfo', JSON.stringify(userInfo));
-              localStorage.setItem('examinationOfficerToken', token);
-              window.location.replace('/exo/home/');
-            }
+            setFormData({...formData, email: ''});
+            data.email = '';
           }
         }, 2000); 
       })
