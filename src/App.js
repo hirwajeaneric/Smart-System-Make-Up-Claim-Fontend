@@ -9,6 +9,16 @@ import Signin from './pages/auth/Signin';
 import ResetPassword from './pages/auth/ResetPassword';
 import RequestPasswordReset from './pages/auth/RequestPasswordReset';
 
+import UserHome from './pages/users/index';
+import Home from './pages/users/Home';
+import ClaimDetails from './pages/users/ClaimDetails';
+import Settings from './pages/users/Settings';
+import NewClaim from './pages/users/Student/NewClaim';
+import Courses from './pages/users/HodDean/Courses';
+import MyCourses from './pages/users/Lecturer/MyCourses';
+import Report from './pages/users/Report';
+import Success from './pages/users/Success';
+
 function App() {
   
   return (
@@ -28,8 +38,15 @@ function App() {
             <Route path='reset-password/:token/:userId' element={<ResetPassword />} />
           </Route>
 
-          <Route path='/:userType/'>
-
+          <Route path='/:userType/' element={<UserHome />} >
+            <Route path='' element={<Home />} />
+            <Route path='settings' element={<Settings />} />
+            <Route path='claim/:id' element={<ClaimDetails />} />
+            <Route path='new-claim' element={<NewClaim />} />
+            <Route path='courses' element={<Courses />} />
+            <Route path='my-courses' element={<MyCourses />} />
+            <Route path='report-preview' element={<Report />} />
+            <Route path='success' element={<Success />} />
           </Route>
           
         </Routes>

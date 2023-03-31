@@ -4,7 +4,8 @@ import { Outlet } from 'react-router-dom'
 const index = () => {
   return (
     <div>
-      <Outlet />
+        <h1>Welcome home</h1>
+        <Outlet />
     </div>
   )
 }
