@@ -6,13 +6,13 @@ const LandingPage = () => {
     <div>
         <h1>WELCOME TO SMART FOR MAKEUP EXAMS</h1>
         <div>
-            <Link to='std/'>Student</Link>
-            <Link to='lec/'>Lecturer</Link>
-            <Link to='hod/'>Head of Department/ Dean</Link>
-            <Link to='acc/'>Accountant</Link>
-            <Link to='dsd/'>Director of Student Discipline</Link>
-            <Link to='exo/'>Examination officer</Link>
-            <Link to='reg/'>Registration officer</Link>
+            <Link to='student/s/'>Student</Link>
+            <Link to='lecturer/l/'>Lecturer</Link>
+            <Link to='hod/h/'>Head of Department/ Dean</Link>
+            <Link to='accountant/a/'>Accountant</Link>
+            <Link to='dsd/d/'>Director of Student Discipline</Link>
+            <Link to='exo/e/'>Examination officer</Link>
+            <Link to='reg/r/'>Registration officer</Link>
         </div>
     </div>
   )

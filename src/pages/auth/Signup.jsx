@@ -43,17 +43,17 @@ const Signup = () => {
   useEffect(() => {
     if (params.userType === 'std') {
       setSysUser('Student');
-    } else if (params.userType === 'lec') {
+    } else if (params.userType === 'l') {
       setSysUser('Lecturer');
-    } else if (params.userType === 'hod') {
+    } else if (params.userType === 'h') {
       setSysUser('Hod/Dean');
-    } else if (params.userType === 'reg') {
+    } else if (params.userType === 'r') {
       setSysUser('Registration officer');
-    } else if (params.userType === 'exo') {
+    } else if (params.userType === 'e') {
       setSysUser('Examination officer');
-    } else if (params.userType === 'dsd') {
+    } else if (params.userType === 'd') {
       setSysUser('Director of student discipline');
-    } else if (params.userType === 'acc') {
+    } else if (params.userType === 'a') {
       setSysUser('Accountant');
     }
   },[params.userType])
@@ -77,17 +77,17 @@ const Signup = () => {
     if (params.userType === 'std') {
       data.registrationNumber = parseInt(registrationNumber);
       data.role = sysUser;
-    } else if (params.userType === 'lec') {
+    } else if (params.userType === 'l') {
       data.role = sysUser;
-    } else if (params.userType === 'hod') {
+    } else if (params.userType === 'h') {
       data.role = sysUser;
-    } else if (params.userType === 'reg') {
+    } else if (params.userType === 'r') {
       data.role = sysUser;
-    } else if (params.userType === 'exo') {
+    } else if (params.userType === 'e') {
       data.role = sysUser;
-    } else if (params.userType === 'dsd') {
+    } else if (params.userType === 'd') {
       data.role = sysUser;
-    } else if (params.userType === 'acc') {
+    } else if (params.userType === 'a') {
       data.role = sysUser;
     } 
 
@@ -125,34 +125,34 @@ const Signup = () => {
           setProgress({ value: '', disabled: false });
 
           if (userInfo.role === 'Student') {
-              localStorage.setItem('stdInfo', JSON.stringify(userInfo));
-              localStorage.setItem('stdTkn', token);
-              window.location.replace('/std/');
-            } else if (userInfo.role === 'Lecturer') {
-              localStorage.setItem('lecInfo', JSON.stringify(userInfo));
-              localStorage.setItem('lecTkn', token);
-              window.location.replace('/lec/');
-            } else if (userInfo.role === 'Hod/Dean') {
-              localStorage.setItem('hodInfo', JSON.stringify(userInfo));
-              localStorage.setItem('hodTkn', token);
-              window.location.replace('/hod/');
-            } else if (userInfo.role === 'Registration officer') {
-              localStorage.setItem('regInfo', JSON.stringify(userInfo));
-              localStorage.setItem('regTkn', token);
-              window.location.replace('/reg/');
-            } else if (userInfo.role === 'Accountant') {
-              localStorage.setItem('accInfo', JSON.stringify(userInfo));
-              localStorage.setItem('accTkn', token);
-              window.location.replace('/acc/');
-            } else if (userInfo.role === 'Director of student discipline') {
-              localStorage.setItem('dodInfo', JSON.stringify(userInfo));
-              localStorage.setItem('dodTkn', token);
-              window.location.replace('/dsd/');
-            } else if (userInfo.role === 'Examination officer') {
-              localStorage.setItem('exoInfo', JSON.stringify(userInfo));
-              localStorage.setItem('exoTkn', token);
-              window.location.replace('/exo/');
-            }
+            localStorage.setItem('stdInfo', JSON.stringify(userInfo));
+            localStorage.setItem('stdTkn', token);
+            window.location.replace('/student/s/');
+          } else if (userInfo.role === 'Lecturer') {
+            localStorage.setItem('lecInfo', JSON.stringify(userInfo));
+            localStorage.setItem('lecTkn', token);
+            window.location.replace('/lecturer/l/');
+          } else if (userInfo.role === 'Hod/Dean') {
+            localStorage.setItem('hodInfo', JSON.stringify(userInfo));
+            localStorage.setItem('hodTkn', token);
+            window.location.replace('/hod/h/');
+          } else if (userInfo.role === 'Registration officer') {
+            localStorage.setItem('regInfo', JSON.stringify(userInfo));
+            localStorage.setItem('regTkn', token);
+            window.location.replace('/reg/r/');
+          } else if (userInfo.role === 'Accountant') {
+            localStorage.setItem('accInfo', JSON.stringify(userInfo));
+            localStorage.setItem('accTkn', token);
+            window.location.replace('/acc/a/');
+          } else if (userInfo.role === 'Director of student discipline') {
+            localStorage.setItem('dodInfo', JSON.stringify(userInfo));
+            localStorage.setItem('dodTkn', token);
+            window.location.replace('/dsd/d/');
+          } else if (userInfo.role === 'Examination officer') {
+            localStorage.setItem('exoInfo', JSON.stringify(userInfo));
+            localStorage.setItem('exoTkn', token);
+            window.location.replace('/exo/e/');
+          }
         }
       }, 2000); 
     })
