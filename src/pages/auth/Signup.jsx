@@ -28,7 +28,7 @@ const Signup = () => {
   // States
   const [showPassword, setShowPassword] = useState(false);
   const [sysUser, setSysUser] = useState('');
-  const [formData, setFormData] = useState({ fullName: '', email: '', registrationNumber: '', phone: '', password: '' });
+  const [formData, setFormData] = useState({ fullName: '', email: '', registrationNumber: 0, phone: '', password: '' });
   const [progress, setProgress] = useState({ value: '', disabled: false});
   const [open, setOpen] = useState(false);
   const [responseMessage, setResponseMessage] = useState({ message: '', severity: ''});
@@ -75,25 +75,19 @@ const Signup = () => {
     const { fullName, email, registrationNumber, phone, password } = formData;
 
     if (params.userType === 'std') {
-      data.registrationNumber = registrationNumber
+      data.registrationNumber = parseInt(registrationNumber);
       data.role = sysUser;
     } else if (params.userType === 'lec') {
-      data.registrationNumber = "";
       data.role = sysUser;
     } else if (params.userType === 'hod') {
-      data.registrationNumber = "";
       data.role = sysUser;
     } else if (params.userType === 'reg') {
-      data.registrationNumber = "";
       data.role = sysUser;
     } else if (params.userType === 'exo') {
-      data.registrationNumber = "";
       data.role = sysUser;
     } else if (params.userType === 'dsd') {
-      data.registrationNumber = "";
       data.role = sysUser;
     } else if (params.userType === 'acc') {
-      data.registrationNumber = "";
       data.role = sysUser;
     } 
 
@@ -102,7 +96,23 @@ const Signup = () => {
     data.fullName = fullName;
     data.email = email;
 
-    console.log(data);
+    if (sysUser === 'Student' && (data.registrationNumber.toString().length === 0)) {
+      setResponseMessage({ message: 'Registration number must be provided', severity: 'error' });
+      setOpen(true);
+      return;
+    } if (data.role === 'Student' && (data.registrationNumber.toString().length < 5 || data.registrationNumber.toString().length > 5)  ) {
+      setResponseMessage({ message: 'Registration number must be 5 digits long', severity: 'error' });
+      setOpen(true);
+      return;
+    } else if (data.role === 'Student' && typeof data.registrationNumber !== 'number') {
+      setResponseMessage({ message: 'Registration number must contain digits only', severity: 'error' });
+      setOpen(true);
+      return;
+    } else if (data.role !== 'Student' && data.email.length === 0) {
+      setResponseMessage({ message: 'Email address must be provided.', severity: 'error' });
+      setOpen(true);
+      return;
+    } 
 
     setProgress({ value: 'Signing up ...', disabled: true });
 
@@ -117,31 +127,31 @@ const Signup = () => {
           if (userInfo.role === 'Student') {
               localStorage.setItem('stdInfo', JSON.stringify(userInfo));
               localStorage.setItem('stdTkn', token);
-              window.location.replace('/std/home/');
+              window.location.replace('/std/');
             } else if (userInfo.role === 'Lecturer') {
               localStorage.setItem('lecInfo', JSON.stringify(userInfo));
               localStorage.setItem('lecTkn', token);
-              window.location.replace('/lec/home/');
+              window.location.replace('/lec/');
             } else if (userInfo.role === 'Hod/Dean') {
               localStorage.setItem('hodInfo', JSON.stringify(userInfo));
               localStorage.setItem('hodTkn', token);
-              window.location.replace('/hod/home/');
+              window.location.replace('/hod/');
             } else if (userInfo.role === 'Registration officer') {
               localStorage.setItem('regInfo', JSON.stringify(userInfo));
               localStorage.setItem('regTkn', token);
-              window.location.replace('/reg/home/');
+              window.location.replace('/reg/');
             } else if (userInfo.role === 'Accountant') {
               localStorage.setItem('accInfo', JSON.stringify(userInfo));
               localStorage.setItem('accTkn', token);
-              window.location.replace('/acc/home/');
+              window.location.replace('/acc/');
             } else if (userInfo.role === 'Director of student discipline') {
               localStorage.setItem('dodInfo', JSON.stringify(userInfo));
               localStorage.setItem('dodTkn', token);
-              window.location.replace('/dsd/home/');
+              window.location.replace('/dsd/');
             } else if (userInfo.role === 'Examination officer') {
               localStorage.setItem('exoInfo', JSON.stringify(userInfo));
               localStorage.setItem('exoTkn', token);
-              window.location.replace('/exo/home/');
+              window.location.replace('/exo/');
             }
         }
       }, 2000); 

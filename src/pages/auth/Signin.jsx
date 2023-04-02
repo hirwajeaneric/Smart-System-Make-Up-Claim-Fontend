@@ -101,8 +101,20 @@ const Signin = () => {
     } 
     data.password = password;
     
-    if (data.role === 'Student' && isNaN(data.registrationNumber)) {
-      setResponseMessage({ message: 'Wrong input, registration number should contain digits only.', severity: 'error' });
+    if (sysUser === 'Student' && (data.registrationNumber.toString().length === 0)) {
+      setResponseMessage({ message: 'Registration number must be provided', severity: 'error' });
+      setOpen(true);
+      return;
+    } if (data.role === 'Student' && (data.registrationNumber.toString().length < 5 || data.registrationNumber.toString().length > 5)  ) {
+      setResponseMessage({ message: 'Registration number must be 5 digits long', severity: 'error' });
+      setOpen(true);
+      return;
+    } else if (data.role === 'Student' && typeof data.registrationNumber !== 'number') {
+      setResponseMessage({ message: 'Registration number must contain digits only', severity: 'error' });
+      setOpen(true);
+      return;
+    } else if (data.role !== 'Student' && data.email.length === 0) {
+      setResponseMessage({ message: 'Email address must be provided.', severity: 'error' });
       setOpen(true);
       return;
     } else if (data.role !== 'Student' && typeof data.email !== 'string') {
