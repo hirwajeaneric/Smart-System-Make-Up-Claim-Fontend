@@ -1,8 +1,8 @@
 import { Button, TextField } from '@mui/material';
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { AuthenticationPageContainer, AuthFormContainer, InnerContainer } from '../../components/styled-components/authenticationPages'
-import Apis from '../../API/Apis';
+import { AuthenticationPageContainer, AuthFormContainer, CommandButtons, InnerContainer } from '../../components/styled-components/authenticationPages'
+import Apis from '../../utils/Apis';
 
 import InputLabel from '@mui/material/InputLabel';
 import IconButton from '@mui/material/IconButton';
@@ -100,9 +100,6 @@ const Signin = () => {
       link = Apis.userApis.signInAsOtherUser;
     } 
     data.password = password;
-
-    console.log(data);
-    console.log('Calling Api: '+link);
     
     if (data.role === 'Student' && isNaN(data.registrationNumber)) {
       setResponseMessage({ message: 'Wrong input, registration number should contain digits only.', severity: 'error' });
@@ -124,33 +121,33 @@ const Signin = () => {
             setProgress({ value: '', disabled: false });
   
             if (userInfo.role === 'Student') {
-              localStorage.setItem('studentInfo', JSON.stringify(userInfo));
-              localStorage.setItem('studentToken', token);
-              window.location.replace('/std/home/');
+              localStorage.setItem('stdInfo', JSON.stringify(userInfo));
+              localStorage.setItem('stdTkn', token);
+              window.location.replace('/std/');
             } else if (userInfo.role === 'Lecturer') {
-              localStorage.setItem('lecturerInfo', JSON.stringify(userInfo));
-              localStorage.setItem('lecturerToken', token);
-              window.location.replace('/lec/home/');
+              localStorage.setItem('lecInfo', JSON.stringify(userInfo));
+              localStorage.setItem('lecTkn', token);
+              window.location.replace('/lec/');
             } else if (userInfo.role === 'Hod/Dean') {
-              localStorage.setItem('hodDeanInfo', JSON.stringify(userInfo));
-              localStorage.setItem('hodDeanToken', token);
-              window.location.replace('/hod/home/');
+              localStorage.setItem('hodInfo', JSON.stringify(userInfo));
+              localStorage.setItem('hodTkn', token);
+              window.location.replace('/hod/');
             } else if (userInfo.role === 'Registration officer') {
-              localStorage.setItem('registrationOfficeInfo', JSON.stringify(userInfo));
-              localStorage.setItem('registrationOfficeToken', token);
-              window.location.replace('/reg/home/');
+              localStorage.setItem('regInfo', JSON.stringify(userInfo));
+              localStorage.setItem('regTkn', token);
+              window.location.replace('/reg/');
             } else if (userInfo.role === 'Accountant') {
-              localStorage.setItem('accountantInfo', JSON.stringify(userInfo));
-              localStorage.setItem('accountantToken', token);
-              window.location.replace('/acc/home/');
+              localStorage.setItem('accInfo', JSON.stringify(userInfo));
+              localStorage.setItem('accTkn', token);
+              window.location.replace('/acc/');
             } else if (userInfo.role === 'Director of student discipline') {
-              localStorage.setItem('directorOfStudentDisciplineInfo', JSON.stringify(userInfo));
-              localStorage.setItem('directorOfStudentDisciplineToken', token);
-              window.location.replace('/dsd/home/');
+              localStorage.setItem('dodInfo', JSON.stringify(userInfo));
+              localStorage.setItem('dodTkn', token);
+              window.location.replace('/dsd/');
             } else if (userInfo.role === 'Examination officer') {
-              localStorage.setItem('examinationOfficerInfo', JSON.stringify(userInfo));
-              localStorage.setItem('examinationOfficerToken', token);
-              window.location.replace('/exo/home/');
+              localStorage.setItem('exoInfo', JSON.stringify(userInfo));
+              localStorage.setItem('exoTkn', token);
+              window.location.replace('/exo/');
             }
           }
         }, 2000); 
@@ -189,12 +186,12 @@ const Signin = () => {
               endAdornment={<InputAdornment position="end"><IconButton aria-label="toggle password visibility"onClick={handleClickShowPassword} onMouseDown={handleMouseDownPassword} edge="end">{showPassword ? <VisibilityOff /> : <Visibility />}</IconButton></InputAdornment>}
             />
           </FormControl>
-          <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-            {!progress.disabled && <Button type='submit' style={{width: '45%' }} variant='contained' size='medium' color='primary'>Sign in </Button>}
-            {progress.disabled && <Button type='submit' style={{width: '45%' }} variant='contained' size='medium' color='primary' disabled>Signing in ... </Button>}
+          <CommandButtons>
+            {!progress.disabled && <Button type='submit' variant='contained' size='medium' color='primary'>Sign in </Button>}
+            {progress.disabled && <Button type='submit' variant='contained' size='medium' color='primary' disabled>Signing in ... </Button>}
 
-            <p style={{ width: '45%' }}>Are you new here? <Link style={{color: 'black'}} to={'../signup'}>Create an account.</Link></p>
-          </div>
+            <p>Are you new here? <Link style={{color: 'black'}} to={'../signup'}>Create an account.</Link></p>
+          </CommandButtons>
           <div>
           <p style={{ width: '100%' }}>Forgot your password? Click here to <Link style={{color: 'black'}} to={'../forgot-password'}>Reset password.</Link></p>
           </div>

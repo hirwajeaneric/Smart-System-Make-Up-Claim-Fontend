@@ -3,7 +3,7 @@ import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { AuthenticationPageContainer, AuthFormContainer, InnerContainer } from '../../components/styled-components/authenticationPages'
+import { AuthenticationPageContainer, AuthFormContainer, CommandButtons, InnerContainer } from '../../components/styled-components/authenticationPages'
 import axios from 'axios';
 
 import InputLabel from '@mui/material/InputLabel';
@@ -14,7 +14,7 @@ import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { Helmet } from 'react-helmet-async';
-import Apis from '../../API/Apis';
+import Apis from '../../utils/Apis';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -115,34 +115,34 @@ const Signup = () => {
           setProgress({ value: '', disabled: false });
 
           if (userInfo.role === 'Student') {
-            localStorage.setItem('studentInfo', JSON.stringify(userInfo));
-            localStorage.setItem('studentToken', token);
-            window.location.replace('/std/home/');
-          } else if (userInfo.role === 'Lecturer') {
-            localStorage.setItem('lecturerInfo', JSON.stringify(userInfo));
-            localStorage.setItem('lecturerToken', token);
-            window.location.replace('/lec/home/');
-          } else if (userInfo.role === 'Hod/Dean') {
-            localStorage.setItem('hodDeanInfo', JSON.stringify(userInfo));
-            localStorage.setItem('hodDeanToken', token);
-            window.location.replace('/hod/home/');
-          } else if (userInfo.role === 'Registration officer') {
-            localStorage.setItem('registrationOfficeInfo', JSON.stringify(userInfo));
-            localStorage.setItem('registrationOfficeToken', token);
-            window.location.replace('/reg/home/');
-          } else if (userInfo.role === 'Accountant') {
-            localStorage.setItem('accountantInfo', JSON.stringify(userInfo));
-            localStorage.setItem('accountantToken', token);
-            window.location.replace('/acc/home/');
-          } else if (userInfo.role === 'Director of student discipline') {
-            localStorage.setItem('directorOfStudentDisciplineInfo', JSON.stringify(userInfo));
-            localStorage.setItem('directorOfStudentDisciplineToken', token);
-            window.location.replace('/dsd/home/');
-          } else if (userInfo.role === 'Examination officer') {
-            localStorage.setItem('examinationOfficerInfo', JSON.stringify(userInfo));
-            localStorage.setItem('examinationOfficerToken', token);
-            window.location.replace('/exo/home/');
-          }
+              localStorage.setItem('stdInfo', JSON.stringify(userInfo));
+              localStorage.setItem('stdTkn', token);
+              window.location.replace('/std/home/');
+            } else if (userInfo.role === 'Lecturer') {
+              localStorage.setItem('lecInfo', JSON.stringify(userInfo));
+              localStorage.setItem('lecTkn', token);
+              window.location.replace('/lec/home/');
+            } else if (userInfo.role === 'Hod/Dean') {
+              localStorage.setItem('hodInfo', JSON.stringify(userInfo));
+              localStorage.setItem('hodTkn', token);
+              window.location.replace('/hod/home/');
+            } else if (userInfo.role === 'Registration officer') {
+              localStorage.setItem('regInfo', JSON.stringify(userInfo));
+              localStorage.setItem('regTkn', token);
+              window.location.replace('/reg/home/');
+            } else if (userInfo.role === 'Accountant') {
+              localStorage.setItem('accInfo', JSON.stringify(userInfo));
+              localStorage.setItem('accTkn', token);
+              window.location.replace('/acc/home/');
+            } else if (userInfo.role === 'Director of student discipline') {
+              localStorage.setItem('dodInfo', JSON.stringify(userInfo));
+              localStorage.setItem('dodTkn', token);
+              window.location.replace('/dsd/home/');
+            } else if (userInfo.role === 'Examination officer') {
+              localStorage.setItem('exoInfo', JSON.stringify(userInfo));
+              localStorage.setItem('exoTkn', token);
+              window.location.replace('/exo/home/');
+            }
         }
       }, 2000); 
     })
@@ -181,13 +181,12 @@ const Signup = () => {
               endAdornment={<InputAdornment position="end"><IconButton aria-label="toggle password visibility"onClick={handleClickShowPassword} onMouseDown={handleMouseDownPassword} edge="end">{showPassword ? <VisibilityOff /> : <Visibility />}</IconButton></InputAdornment>}
             />
           </FormControl>
-          <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-            
-            {!progress.disabled && <Button type='submit' style={{width: '45%' }} variant='contained' size='medium' color='primary'>Sign up </Button>}
-            {progress.disabled && <Button type='submit' style={{width: '45%' }} variant='contained' size='medium' color='primary' disabled>{progress.value} </Button>}
+          <CommandButtons>
+            {!progress.disabled && <Button type='submit' variant='contained' size='medium' color='primary'>Sign up </Button>}
+            {progress.disabled && <Button type='submit' variant='contained' size='medium' color='primary' disabled>{progress.value} </Button>}
 
-            <p style={{ width: '45%' }}>Do you already have an account? <Link style={{color: 'black'}} to={'../signin'}>Sign In Here</Link></p>
-          </div>
+            <p>Do you already have an account? <Link style={{color: 'black'}} to={'../signin'}>Sign In Here</Link></p>
+          </CommandButtons>
         </AuthFormContainer>
       </InnerContainer>
       

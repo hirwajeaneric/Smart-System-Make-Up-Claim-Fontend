@@ -174,15 +174,31 @@ export const AuthFormContainer = styled.form`
     }
 `;
 
-export const InnerContainerx = styled.div`
-        
+export const CommandButtons = styled.div`
+    display: flex; 
+    flex-direction: row; 
+    flex-wrap: nowrap;
+    width: 100%;
+    justify-content: space-between; 
+    align-items: flex-start;
+
+    button, p {
+        width: 45%;
+    }
 
     @media (max-width: 1080px) {
             
     }
 
     @media (max-width: 768px) {
+        button, p {
+            width: 100%;
+        }        
+        flex-wrap: wrap;
         
+        button { 
+            margin-bottom: 20px;
+        }
     }
 
     @media (max-width: 480px) {

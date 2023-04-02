@@ -2,7 +2,7 @@ import { Button, TextField } from '@mui/material';
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { AuthenticationPageContainer, AuthFormContainer, InnerContainer } from '../../components/styled-components/authenticationPages'
-import Apis from '../../API/Apis';
+import Apis from '../../utils/Apis';
 
 import { Helmet } from 'react-helmet-async';
 import Snackbar from '@mui/material/Snackbar';
