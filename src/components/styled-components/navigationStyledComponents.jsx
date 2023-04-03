@@ -79,11 +79,11 @@ export const NavigationLinks = styled.div`
     }
 
     @media (max-width: 768px) {
-        
+        display: none;
     }
 
     @media (max-width: 480px) {
-        
+        display: none;
     }
 `;
 
@@ -148,18 +148,69 @@ export const UserAccountIcon = styled.button`
     }
 `;
 
-export const G = styled.div`
+export const MobileMenu = styled.button`
+    border: none;
+    margin: 0;
+    font-size: 160%;
+    color: white;
+    cursor: pointer;
+    background: transparent;
+    display: none;
 
     @media (max-width: 1080px) {
-            
+     
     }
 
     @media (max-width: 768px) {
-        
+        display: flex;
     }
 
     @media (max-width: 480px) {
-        
+        display: flex;
+    }
+`;
+
+export const MobileNavigationLinks = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;        
+    margin-top: 20px;
+    width: 100%;
+
+    div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+
+        a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 15px;
+            padding: 19px 0;
+            width: 100%;
+    
+            &:hover {
+                color: orange;
+            }
+    
+            &.active {
+                border-bottom: 4px solid orange;
+            }
+        }
+    }        
+
+    @media (max-width: 1080px) {
+        display: none;    
+    }
+
+    @media (max-width: 768px) {
+        display: flex;
+    }
+
+    @media (max-width: 480px) {
+
     }
 `;
 

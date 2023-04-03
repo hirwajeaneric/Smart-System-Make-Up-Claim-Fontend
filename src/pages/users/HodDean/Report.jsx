@@ -1,8 +1,11 @@
 import React from 'react'
+import { Page } from '../../../components/styled-components/pageStyledComponents'
 
 const Report = () => {
   return (
-    <div>Report</div>
+    <Page>
+      Report
+    </Page>
   )
 }
 

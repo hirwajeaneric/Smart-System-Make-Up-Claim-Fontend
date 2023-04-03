@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { SectionOrPageContainer } from '../styled-components/pageStyledComponents'
-import { Logo, LogoSpace, NavigationBarContainer, NavigationLinks, TopBarLeft, TopBarRight, UserAccountIcon } from '../styled-components/navigationStyledComponents'
-import { NavLink, useParams } from 'react-router-dom'
+import { Logo, LogoSpace, MobileMenu, MobileNavigationLinks, NavigationBarContainer, NavigationLinks, TopBarLeft, TopBarRight, UserAccountIcon } from '../styled-components/navigationStyledComponents'
+import { NavLink, useParams } from 'react-router-dom';
+import { AiOutlineMenu } from 'react-icons/ai';
 
 const NavigationBar = () => {
   // Hooks
@@ -9,7 +10,8 @@ const NavigationBar = () => {
   
   // States
   const [sysUser, setSysUser] = useState({});
-  const [userName, setUserName] = useState('')
+  const [userName, setUserName] = useState('');
+  const [visible, setVisible] = useState(false);
   
   // Fetching user data according to paramester and local storage
   useEffect(() => {
@@ -54,10 +56,15 @@ const NavigationBar = () => {
           </LogoSpace>
           <NavigationLinks>
             <NavLink to={'./'}>Home</NavLink>
-            <NavLink to={'courses'}>Courses</NavLink>
-            <NavLink to={'report-preview'}>Reports</NavLink>
+            {sysUser.role === 'Hod/Dean' && <NavLink to={'courses'}>Courses</NavLink>}
+            {(sysUser.role === 'Hod/Dean' || sysUser.role === 'Examination officer') && <NavLink to={'report-preview'}>Reports</NavLink>}
+            {sysUser.role === 'Student' && <NavLink to={'new-claim'}>New claim</NavLink>}
+            {sysUser.role === 'Examination officer' && <NavLink to={'exams-timetable'}>Exams timetable</NavLink>}
             <NavLink to={'settings'}>Settings</NavLink>
           </NavigationLinks>
+          <MobileMenu onClick={() => setVisible(!visible)}>
+            <AiOutlineMenu />
+          </MobileMenu>
         </TopBarLeft>
         <TopBarRight>
           <UserAccountIcon>
@@ -65,6 +72,18 @@ const NavigationBar = () => {
           </UserAccountIcon>
         </TopBarRight>
       </NavigationBarContainer>
+      
+      {/* Bottom mobile menu  */}
+      {visible===true && <MobileNavigationLinks>
+        <div>
+          <NavLink to={'./'} onClick={() => setVisible(!visible)}>Home</NavLink>
+          {sysUser.role === 'Student' && <NavLink to={'new-claim'}>New claim</NavLink>}
+          {sysUser.role === 'Hod/Dean' && <NavLink to={'courses'} onClick={() => setVisible(!visible)}>Courses</NavLink>}
+          {(sysUser.role === 'Hod/Dean' || sysUser.role === 'Examination officer') && <NavLink to={'report-preview'} onClick={() => setVisible(!visible)}>Reports</NavLink>}
+          {sysUser.role === 'Examination officer' && <NavLink to={'exams-timetable'}>Exams timetable</NavLink>}
+          <NavLink to={'settings'} onClick={() => setVisible(!visible)}>Settings</NavLink>
+        </div>
+      </MobileNavigationLinks>}
     </SectionOrPageContainer>
   )
 }

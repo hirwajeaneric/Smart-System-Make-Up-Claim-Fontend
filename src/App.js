@@ -110,7 +110,7 @@ function App() {
             <Route path='settings' element={localStorage.getItem("dodTkn") ? <DodSettings /> : <Navigate replace to='/dsd/d/auth/signin' />} />
           </Route>
           
-          {/* Examincation Officer Routes */}
+          {/* Examination Officer Routes */}
           <Route path={`exo/:userType`} element={localStorage.getItem("exoTkn") ? <ExOfficerAccount /> : <Navigate replace to='/exo/e/auth/signin' />} >
             <Route path='' element={localStorage.getItem("exoTkn") ? <ExOfficerHome /> : <Navigate replace to='/exo/e/auth/signin' />} />
             <Route path='settings' element={localStorage.getItem("exoTkn") ? <ExOfficerSettings /> : <Navigate replace to='/exo/e/auth/signin' />} />

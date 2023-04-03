@@ -1,8 +1,11 @@
 import React from 'react'
+import { Page } from '../../../components/styled-components/pageStyledComponents'
 
 const CoursesAllocation = () => {
   return (
-    <div>CoursesAllocation</div>
+    <Page>
+      CoursesAllocation
+    </Page>
   )
 }
 
