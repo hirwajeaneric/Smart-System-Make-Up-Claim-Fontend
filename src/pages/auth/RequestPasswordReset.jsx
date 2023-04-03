@@ -33,19 +33,19 @@ const RequestPasswordReset = () => {
   };
 
   useEffect(() => {
-    if (params.userType === 'std') {
+    if (params.userType === 's') {
       setSysUser('Student');
-    } else if (params.userType === 'lec') {
+    } else if (params.userType === 'l') {
       setSysUser('Lecturer');
-    } else if (params.userType === 'hod') {
+    } else if (params.userType === 'h') {
       setSysUser('Hod/Dean');
-    } else if (params.userType === 'reg') {
+    } else if (params.userType === 'r') {
       setSysUser('Registration officer');
-    } else if (params.userType === 'exo') {
+    } else if (params.userType === 'e') {
       setSysUser('Examination officer');
-    } else if (params.userType === 'dsd') {
+    } else if (params.userType === 'd') {
       setSysUser('Director of student discipline');
-    } else if (params.userType === 'acc') {
+    } else if (params.userType === 'a') {
       setSysUser('Accountant');
     }
   },[params.userType])
@@ -64,25 +64,25 @@ const RequestPasswordReset = () => {
     var link = Apis.userApis.requestPasswordReset;
     
     //  Setting user data according to users
-    if (params.userType === 'std') {
+    if (params.userType === 's') {
       data.email = email
       data.role = sysUser;  
-    } else if (params.userType === 'lec') {
+    } else if (params.userType === 'l') {
       data.email = email
       data.role = sysUser;
-    } else if (params.userType === 'hod') {
+    } else if (params.userType === 'h') {
       data.email = email
       data.role = sysUser;
-    } else if (params.userType === 'reg') {
+    } else if (params.userType === 'r') {
       data.email = email
       data.role = sysUser;
-    } else if (params.userType === 'exo') {
+    } else if (params.userType === 'e') {
       data.email = email
       data.role = sysUser;
-    } else if (params.userType === 'dsd') {
+    } else if (params.userType === 'd') {
       data.email = email
       data.role = sysUser;
-    } else if (params.userType === 'acc') {
+    } else if (params.userType === 'a') {
       data.email = email
       data.role = sysUser;
     } 

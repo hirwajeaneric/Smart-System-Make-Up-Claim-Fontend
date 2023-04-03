@@ -7,6 +7,7 @@ export const SectionOrPageContainer = styled.div`
     align-items: center;
     justify-content: center;
     padding: 0 90px;
+    background: #ebf0fa;
 
     @media (max-width: 1080px) {
             
@@ -71,7 +72,7 @@ export const PageTitle = styled.div`
 export const PageContent = styled.div`
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     flex-wrap: nowrap;
     width: 100%;
@@ -93,7 +94,13 @@ export const CourseDivision = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 70%;
+    width: 69%;
+    padding: 20px 15px;
+    // box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+    gap: 20px;
+    border-radius: 8px;
+    background: white;
+    border: 1px solid #c2d1f0;
 
     h2 {
         font-weight: 400;
@@ -104,7 +111,8 @@ export const CourseDivision = styled.div`
     }
 
     @media (max-width: 768px) {
-        
+        width: 100%;
+        margin-bottom: 20px;
     }
 
     @media (max-width: 480px) {
@@ -116,7 +124,13 @@ export const LecturerDivision = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 30%;
+    width: 29%;
+    padding: 20px 15px;
+    // box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+    gap: 20px;
+    border-radius: 8px;
+    background: white;
+    border: 1px solid #c2d1f0;
 
     h2 {
         font-weight: 400;
@@ -127,7 +141,7 @@ export const LecturerDivision = styled.div`
     }
 
     @media (max-width: 768px) {
-        
+        width: 100%;
     }
 
     @media (max-width: 480px) {
