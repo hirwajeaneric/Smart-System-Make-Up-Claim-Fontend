@@ -70,7 +70,7 @@ export const NavigationLinks = styled.div`
         }
 
         &.active {
-            border-bottom: 4px solid orange;
+            border-bottom: 5px solid orange;
         }
     }
 
@@ -211,65 +211,5 @@ export const MobileNavigationLinks = styled.div`
 
     @media (max-width: 480px) {
 
-    }
-`;
-
-export const H = styled.div`
-
-    @media (max-width: 1080px) {
-            
-    }
-
-    @media (max-width: 768px) {
-        
-    }
-
-    @media (max-width: 480px) {
-        
-    }
-`;
-
-export const I = styled.div`
-
-    @media (max-width: 1080px) {
-            
-    }
-
-    @media (max-width: 768px) {
-        
-    }
-
-    @media (max-width: 480px) {
-        
-    }
-`;
-
-export const J = styled.div`
-
-    @media (max-width: 1080px) {
-            
-    }
-
-    @media (max-width: 768px) {
-        
-    }
-
-    @media (max-width: 480px) {
-        
-    }
-`;
-
-export const K = styled.div`
-
-    @media (max-width: 1080px) {
-            
-    }
-
-    @media (max-width: 768px) {
-        
-    }
-
-    @media (max-width: 480px) {
-        
     }
 `;
