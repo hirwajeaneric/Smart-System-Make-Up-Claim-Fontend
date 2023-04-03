@@ -1,7 +1,8 @@
 import { Button, TextField } from '@mui/material';
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { AuthenticationPageContainer, AuthFormContainer, InnerContainer } from '../../components/styled-components/authenticationPages'
+import { AuthenticationPageContainer, AuthFormContainer, CommandButtons, InnerContainer } from '../../components/styled-components/authenticationPages'
+import Apis from '../../utils/Apis';
 
 import InputLabel from '@mui/material/InputLabel';
 import IconButton from '@mui/material/IconButton';
@@ -40,19 +41,19 @@ const Signin = () => {
   };
 
   useEffect(() => {
-    if (params.userType === 'std') {
+    if (params.userType === 's') {
       setSysUser('Student');
-    } else if (params.userType === 'lec') {
+    } else if (params.userType === 'l') {
       setSysUser('Lecturer');
-    } else if (params.userType === 'hod') {
+    } else if (params.userType === 'h') {
       setSysUser('Hod/Dean');
-    } else if (params.userType === 'reg') {
+    } else if (params.userType === 'r') {
       setSysUser('Registration officer');
-    } else if (params.userType === 'exo') {
+    } else if (params.userType === 'e') {
       setSysUser('Examination officer');
-    } else if (params.userType === 'dsd') {
+    } else if (params.userType === 'd') {
       setSysUser('Director of student discipline');
-    } else if (params.userType === 'acc') {
+    } else if (params.userType === 'a') {
       setSysUser('Accountant');
     }
   },[params.userType])
@@ -68,42 +69,52 @@ const Signin = () => {
 
     const { email, registrationNumber, password } = formData;
     
-    var link = `http://localhost:5555/api/v1/ssmec/user/`;
-    if (params.userType === 'std') {
+    var link = '';
+    if (params.userType === 's') {
       data.registrationNumber = parseInt(registrationNumber);
       data.role = sysUser;
-      link = link+'studentSignIn';  
-    } else if (params.userType === 'lec') {
+      link = Apis.userApis.signInAsStudent  
+    } else if (params.userType === 'l') {
       data.email = email
       data.role = sysUser;
-      link = link+'signin';
-    } else if (params.userType === 'hod') {
+      link = Apis.userApis.signInAsOtherUser;
+    } else if (params.userType === 'h') { 
       data.email = email
       data.role = sysUser;
-      link = link+'signin';
-    } else if (params.userType === 'reg') {
+      link = Apis.userApis.signInAsOtherUser;
+    } else if (params.userType === 'r') {
       data.email = email
       data.role = sysUser;
-      link = link+'signin';
-    } else if (params.userType === 'exo') {
+      link = Apis.userApis.signInAsOtherUser;
+    } else if (params.userType === 'e') {
       data.email = email
       data.role = sysUser;
-      link = link+'signin';
-    } else if (params.userType === 'dsd') {
+      link = Apis.userApis.signInAsOtherUser;
+    } else if (params.userType === 'd') {
       data.email = email
       data.role = sysUser;
-      link = link+'signin';
-    } else if (params.userType === 'acc') {
+      link = Apis.userApis.signInAsOtherUser;
+    } else if (params.userType === 'a') {
       data.email = email
       data.role = sysUser;
-      link = link+'signin';
+      link = Apis.userApis.signInAsOtherUser;
     } 
     data.password = password;
-
-    console.log(data);
-
-    if (data.role === 'Student' && isNaN(data.registrationNumber)) {
-      setResponseMessage({ message: 'Wrong input, registration number should contain digits only.', severity: 'error' });
+    
+    if (sysUser === 'Student' && (data.registrationNumber.toString().length === 0)) {
+      setResponseMessage({ message: 'Registration number must be provided', severity: 'error' });
+      setOpen(true);
+      return;
+    } if (data.role === 'Student' && (data.registrationNumber.toString().length < 5 || data.registrationNumber.toString().length > 5)  ) {
+      setResponseMessage({ message: 'Registration number must be 5 digits long', severity: 'error' });
+      setOpen(true);
+      return;
+    } else if (data.role === 'Student' && typeof data.registrationNumber !== 'number') {
+      setResponseMessage({ message: 'Registration number must contain digits only', severity: 'error' });
+      setOpen(true);
+      return;
+    } else if (data.role !== 'Student' && data.email.length === 0) {
+      setResponseMessage({ message: 'Email address must be provided.', severity: 'error' });
       setOpen(true);
       return;
     } else if (data.role !== 'Student' && typeof data.email !== 'string') {
@@ -122,33 +133,33 @@ const Signin = () => {
             setProgress({ value: '', disabled: false });
   
             if (userInfo.role === 'Student') {
-              localStorage.setItem('studentInfo', JSON.stringify(userInfo));
-              localStorage.setItem('studentToken', token);
-              window.location.replace('/std/home/');
+              localStorage.setItem('stdInfo', JSON.stringify(userInfo));
+              localStorage.setItem('stdTkn', token);
+              window.location.replace('/student/s/');
             } else if (userInfo.role === 'Lecturer') {
-              localStorage.setItem('lecturerInfo', JSON.stringify(userInfo));
-              localStorage.setItem('lecturerToken', token);
-              window.location.replace('/lec/home/');
+              localStorage.setItem('lecInfo', JSON.stringify(userInfo));
+              localStorage.setItem('lecTkn', token);
+              window.location.replace('/lecturer/l/');
             } else if (userInfo.role === 'Hod/Dean') {
-              localStorage.setItem('hodDeanInfo', JSON.stringify(userInfo));
-              localStorage.setItem('hodDeanToken', token);
-              window.location.replace('/hod/home/');
+              localStorage.setItem('hodInfo', JSON.stringify(userInfo));
+              localStorage.setItem('hodTkn', token);
+              window.location.replace('/hod/h/');
             } else if (userInfo.role === 'Registration officer') {
-              localStorage.setItem('registrationOfficeInfo', JSON.stringify(userInfo));
-              localStorage.setItem('registrationOfficeToken', token);
-              window.location.replace('/reg/home/');
+              localStorage.setItem('regInfo', JSON.stringify(userInfo));
+              localStorage.setItem('regTkn', token);
+              window.location.replace('/reg/r/');
             } else if (userInfo.role === 'Accountant') {
-              localStorage.setItem('accountantInfo', JSON.stringify(userInfo));
-              localStorage.setItem('accountantToken', token);
-              window.location.replace('/acc/home/');
+              localStorage.setItem('accInfo', JSON.stringify(userInfo));
+              localStorage.setItem('accTkn', token);
+              window.location.replace('/acc/a/');
             } else if (userInfo.role === 'Director of student discipline') {
-              localStorage.setItem('directorOfStudentDisciplineInfo', JSON.stringify(userInfo));
-              localStorage.setItem('directorOfStudentDisciplineToken', token);
-              window.location.replace('/dsd/home/');
+              localStorage.setItem('dodInfo', JSON.stringify(userInfo));
+              localStorage.setItem('dodTkn', token);
+              window.location.replace('/dsd/d/');
             } else if (userInfo.role === 'Examination officer') {
-              localStorage.setItem('examinationOfficerInfo', JSON.stringify(userInfo));
-              localStorage.setItem('examinationOfficerToken', token);
-              window.location.replace('/exo/home/');
+              localStorage.setItem('exoInfo', JSON.stringify(userInfo));
+              localStorage.setItem('exoTkn', token);
+              window.location.replace('/exo/e/');
             }
           }
         }, 2000); 
@@ -187,12 +198,12 @@ const Signin = () => {
               endAdornment={<InputAdornment position="end"><IconButton aria-label="toggle password visibility"onClick={handleClickShowPassword} onMouseDown={handleMouseDownPassword} edge="end">{showPassword ? <VisibilityOff /> : <Visibility />}</IconButton></InputAdornment>}
             />
           </FormControl>
-          <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-            {!progress.disabled && <Button type='submit' style={{width: '45%' }} variant='contained' size='medium' color='primary'>Sign in </Button>}
-            {progress.disabled && <Button type='submit' style={{width: '45%' }} variant='contained' size='medium' color='primary' disabled>Signing in ... </Button>}
+          <CommandButtons>
+            {!progress.disabled && <Button type='submit' variant='contained' size='medium' color='primary'>Sign in </Button>}
+            {progress.disabled && <Button type='submit' variant='contained' size='medium' color='primary' disabled>Signing in ... </Button>}
 
-            <p style={{ width: '45%' }}>Are you new here? <Link style={{color: 'black'}} to={'../signup'}>Create an account.</Link></p>
-          </div>
+            <p>Are you new here? <Link style={{color: 'black'}} to={'../signup'}>Create an account.</Link></p>
+          </CommandButtons>
           <div>
           <p style={{ width: '100%' }}>Forgot your password? Click here to <Link style={{color: 'black'}} to={'../forgot-password'}>Reset password.</Link></p>
           </div>
