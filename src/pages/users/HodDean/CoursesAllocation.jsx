@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { CourseDivision, LecturerDivision, Page, PageContent, PageTitle } from '../../../components/styled-components/pageStyledComponents'
+import { CourseDivision, LecturerDivision, LecturerList, Page, PageContent, PageTitle } from '../../../components/styled-components/pageStyledComponents'
 import { Helmet } from 'react-helmet-async'
 import CoursesTable from '../../../components/tables/CoursesTable'
 import axios from 'axios';
@@ -9,6 +9,7 @@ import { useParams } from 'react-router-dom';
 const CoursesAllocation = () => {
   const params = useParams();
   const [data, setData] = useState([]);
+  const [lecturers, setLecturers] = useState([]);
   const [sysUser, setSysUser] = useState({});
 
   useEffect(() => {
@@ -30,14 +31,17 @@ const CoursesAllocation = () => {
     }
     setSysUser(user);
 
-    // Fetch courses that are studied by students from the department lead by this user
-    
-    axios.get(`${Apis.courseApis.findByDepartment}`)
+    // Fetch a list of lecturers
+    axios.get(`${Apis.userApis.list}`)
     .then(response => {
-      let fetchedData = response.data.course;
+      let fetchedData = response.data.users;
+      let users = [];
       fetchedData.forEach(element => {
-        element.id = element._id;
-      });
+        if (element.role ==='Lecturer') {
+          users.push(element);
+        }
+      })
+      setLecturers(users);
     })
     .catch(error => console.log(error));
 
@@ -68,7 +72,19 @@ const CoursesAllocation = () => {
           <CoursesTable data={data} />
         </CourseDivision>
         <LecturerDivision>
-          <h3>Lecturers</h3>
+          <h3>Lecturers</h3>          
+          {lecturers.length > 0 ?
+            <LecturerList>
+              {lecturers.map((item, index) => (
+                  <li key={index}>
+                    <button type='button'>{item.fullName}</button>
+                  </li>
+                ))
+              } 
+            </LecturerList>
+            :
+            <p>No available lectures.</p>
+          }
         </LecturerDivision>
       </PageContent>
     </Page>

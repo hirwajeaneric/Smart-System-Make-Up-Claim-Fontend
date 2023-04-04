@@ -47,9 +47,6 @@ function CustomToolbar() {
 var rows = [];
 
 const CoursesTable = ({data}) => {
-  console.log('Available data: ');
-  console.log(data);
-
   rows = data;
   
   return (

@@ -14,11 +14,11 @@ export const SectionOrPageContainer = styled.div`
     }
 
     @media (max-width: 768px) {
-        padding: 0 50px;
+        padding: 0 35px;
     }
 
     @media (max-width: 480px) {
-        padding: 0 20px;
+        padding: 0 15px;
     }
 `;
 
@@ -142,6 +142,42 @@ export const LecturerDivision = styled.div`
 
     @media (max-width: 768px) {
         width: 100%;
+    }
+
+    @media (max-width: 480px) {
+        
+    }
+`;
+
+export const LecturerList = styled.ul`
+    list-style-type: none;
+    font-size: 90%;
+    width: 100%;
+
+    li {
+        width: 100%;
+        border-bottom: 1px solid gray;
+
+        &:hover {
+            background: #ebf0fa;
+        }
+
+        button {
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
+            background: transparent;
+            border: none;
+            padding: 10px;
+        }
+    }
+
+    @media (max-width: 1080px) {
+            
+    }
+
+    @media (max-width: 768px) {
+        
     }
 
     @media (max-width: 480px) {

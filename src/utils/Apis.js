@@ -14,7 +14,7 @@ let Apis = {
         list: `${mainAddress}/user/list`,
     },
     claimApis: {
-
+        
     },
     courseApis: {
         listAllCourses: `${mainAddress}/course/list`,
