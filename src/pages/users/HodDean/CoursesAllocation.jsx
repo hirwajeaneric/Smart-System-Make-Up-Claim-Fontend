@@ -31,44 +31,26 @@ const CoursesAllocation = () => {
     setSysUser(user);
 
     // Fetch courses that are studied by students from the department lead by this user
-    let myCourses = [];
-    let generalCourses = [];
     
-    console.log(`${Apis.courseApis.findByDepartment}${user.department}`)
-
-    axios.get(`${Apis.courseApis.findByDepartment}${user.department}`)
+    axios.get(`${Apis.courseApis.findByDepartment}`)
     .then(response => {
-      response.data.course.forEach(element => {
+      let fetchedData = response.data.course;
+      fetchedData.forEach(element => {
         element.id = element._id;
-        myCourses.push(element);
       });
     })
     .catch(error => console.log(error));
 
     // Fetch courses that are studied by students from all departments
-    console.log(`${Apis.courseApis.findByDepartment}All`);
-    
-    axios.get(`${Apis.courseApis.findByDepartment}All`)
+    axios.get(`${Apis.courseApis.findByDepartment}All&department=${user.department}`)
     .then(response => {
-      response.data.course.forEach(element => {
+      let fetchedData = response.data.course;
+      fetchedData.forEach(element => {
         element.id = element._id;
-        generalCourses.push(element)
       });
+      setData(fetchedData);
     })
     .catch(error => console.log(error));
-
-    console.log(generalCourses);
-    console.log(myCourses);
-
-    setData(generalCourses);
-
-    // if (myCourses.length === 0 && generalCourses.length !== 0) {
-    //   setData(generalCourses);
-    // } else if (myCourses.length !== 0 && myCourses.length === 0) {
-    //   setData(myCourses);
-    // } else if (myCourses.length !== 0 && myCourses.length !== 0) {
-    //   setData(myCourses.concat(generalCourses));
-    // }
   },[params.userType]);  
 
   return (
@@ -78,16 +60,15 @@ const CoursesAllocation = () => {
         <meta name="description" content="Hod/Dean's courses allocation page."/> 
       </Helmet>
       <PageTitle>
-        <h1>Courses</h1>
+        <h2>Courses</h2>
       </PageTitle>
       <PageContent>
         <CourseDivision>
-          <h2>Courses in this semester</h2>
-          <p>{data.length}</p>
+          <h3>Courses in this semester</h3>
           <CoursesTable data={data} />
         </CourseDivision>
         <LecturerDivision>
-          <h2>Lecturers</h2>
+          <h3>Lecturers</h3>
         </LecturerDivision>
       </PageContent>
     </Page>

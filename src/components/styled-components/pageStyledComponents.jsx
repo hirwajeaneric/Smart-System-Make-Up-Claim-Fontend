@@ -52,7 +52,7 @@ export const PageTitle = styled.div`
     width: 100%;
     margin-bottom: 20px;
 
-    h1 {
+    h2 {
         font-weight: 400;
     }
 
@@ -102,8 +102,8 @@ export const CourseDivision = styled.div`
     background: white;
     border: 1px solid #c2d1f0;
 
-    h2 {
-        font-weight: 400;
+    h3 {
+        font-weight: 600;
     }
 
     @media (max-width: 1080px) {
@@ -132,8 +132,8 @@ export const LecturerDivision = styled.div`
     background: white;
     border: 1px solid #c2d1f0;
 
-    h2 {
-        font-weight: 400;
+    h3 {
+        font-weight: 600;
     }
 
     @media (max-width: 1080px) {

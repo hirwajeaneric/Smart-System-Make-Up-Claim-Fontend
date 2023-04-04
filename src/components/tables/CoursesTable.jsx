@@ -12,26 +12,26 @@ const columns = [
   {
       field: 'name',
       headerName: 'Name',
-      width: 200,
+      width: 250,
   },
   {
       field: 'code',
       headerName: 'Code',
-      width: 170,
+      width: 130,
   },{
       field: 'credits',
       headerName: 'Credits',
-      width: 180,
+      width: 70,
   },
   {
       field: 'department',
       headerName: 'Department',
-      width: 170,
+      width: 200,
   },{
       field: 'actions',
       headerName: 'Actions',
       type: 'actions',
-      width: 120,
+      width: 70,
       renderCell: (params) => <TableActions params= {params} />
   },
 ]
@@ -47,21 +47,25 @@ function CustomToolbar() {
 var rows = [];
 
 const CoursesTable = ({data}) => {
+  console.log('Available data: ');
+  console.log(data);
+
   rows = data;
-    return (
-      <Box sx={{height: 350, width:'100%'}}>
-        <DataGrid 
-          rows={rows}
-          columns={columns}
-          pageSize={5}
-          rowsPerPageOptions={[5]}
-          disableSelectionOnClick
-          experimentalFeatures={{newEditingApi: true}}
-          components={{Toolbar: CustomToolbar}}
-        />
-      </Box>
-        
-    );
+  
+  return (
+    <Box sx={{height: 350, width:'100%'}}>
+      <DataGrid 
+        rows={rows}
+        columns={columns}
+        pageSize={5}
+        rowsPerPageOptions={[5]}
+        disableSelectionOnClick
+        experimentalFeatures={{newEditingApi: true}}
+        components={{Toolbar: CustomToolbar}}
+      />
+    </Box>
+      
+  );
 }
 
 export default CoursesTable;
