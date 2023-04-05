@@ -58,6 +58,7 @@ import RegOfficerHome from './pages/users/RegistrationOfficer/Home';
 import RegOfficerSettings from './pages/users/RegistrationOfficer/Settings';
 import SemesterTimeTable from './pages/users/RegistrationOfficer/SemesterTimeTable';
 import CourseDetails from './pages/users/HodDean/CourseDetails';
+import Semester from './pages/users/HodDean/Semester';
 
 function App() {
   return (
@@ -102,7 +103,9 @@ function App() {
             <Route path='' element={localStorage.getItem("hodTkn") ? <HodHome /> : <Navigate replace to='/hod/h/auth/signin' />} />
             <Route path='settings' element={localStorage.getItem("hodTkn") ? <HodSettings /> : <Navigate replace to='/hod/h/auth/signin' />} />
             <Route path='courses' element={localStorage.getItem("hodTkn") ? <CoursesAllocation /> : <Navigate replace to='/hod/h/auth/signin' />} />
-            <Route path='course/:courseId' element={localStorage.getItem("hodTkn") ? <CourseDetails /> : <Navigate replace to='/hod/h/auth/signin' />} />
+            <Route path='course/:courseId' element={localStorage.getItem("hodTkn") ? <CourseDetails /> : <Navigate replace to='/hod/h/auth/signin' />}>
+              <Route path='sem/:number/:academicYear' element={localStorage.getItem("hodTkn") ? <Semester /> : <Navigate replace to='/hod/h/auth/signin' />} />  
+            </Route>
             <Route path='report-preview' element={localStorage.getItem("hodTkn") ? <HodReport /> : <Navigate replace to='/hod/h/auth/signin' />} />
           </Route>
 

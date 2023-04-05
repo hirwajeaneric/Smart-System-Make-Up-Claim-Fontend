@@ -234,6 +234,183 @@ export const Popup = styled(Box)`
     }
 `;
 
+export const TopCourseInformation = styled.div`
+    div {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        width: 100%;
+        align-items: center;
+        gap: 20px;
+    }
+
+    @media (max-width: 1080px) {
+            
+    }
+
+    @media (max-width: 768px) {
+        
+    }
+
+    @media (max-width: 480px) {
+        
+    }
+`;
+
+export const CourseManagementContainer = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    align-items: flex-start;
+    flex-wrap: wrap;
+
+    @media (max-width: 1080px) {
+            
+    }
+
+    @media (max-width: 768px) {
+        
+    }
+
+    @media (max-width: 480px) {
+        
+    }
+`;
+
+export const Semesters = styled.div`
+    width: 33%;
+    margin-bottom: 20px;
+
+    h4 {
+        margin-bottom: 10px;
+    }
+
+    @media (max-width: 1080px) {
+            
+    }
+
+    @media (max-width: 991px) {
+        width: 100%;
+    }
+
+    @media (max-width: 768px) {
+     
+    }
+
+    @media (max-width: 480px) {
+        
+    }
+`;
+
+export const Lecturers = styled.div`
+    width: 33%;
+    margin-bottom: 20px;
+
+    h4 {
+        margin-bottom: 10px;
+    }
+
+    @media (max-width: 1080px) {
+            
+    }
+
+    @media (max-width: 991px) {
+        width: 100%;
+    }
+
+    @media (max-width: 768px) {
+     
+    }
+
+    @media (max-width: 480px) {
+        
+    }
+`;
+
+export const ChooseLecturers = styled.div`
+    width: 33%;
+    margin-bottom: 20px;
+
+    h4 {
+        margin-bottom: 10px;
+    }
+
+    @media (max-width: 1080px) {
+            
+    }
+
+    @media (max-width: 991px) {
+        width: 100%;
+    }
+
+    @media (max-width: 768px) {
+     
+    }
+
+    @media (max-width: 480px) {
+        
+    }
+`;
+
+export const ListOfSemesters = styled.div`
+    a {
+        margin-top: 10px;
+        font-size: 90%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        align-items: center;
+        padding: 5px;
+        background: #90caf9;
+        border-bottom: 1px solid gray;
+        text-decoration: none;
+        color: black;
+
+        &:hover {
+            background: white-smoke;
+        }
+
+        &.active {
+            background: white;
+        }
+    }
+
+    @media (max-width: 1080px) {
+            
+    }
+
+    @media (max-width: 768px) {
+        
+    }
+
+    @media (max-width: 480px) {
+        
+    }
+`;
+
+export const SemesterLecturerContainer = styled.div`
+    padding: 10px;
+    background: #ebebe0;
+    margin-top: 10px;
+    border: 1px solid #d6d6c2;
+    font-size: 90%;
+
+    @media (max-width: 1080px) {
+            
+    }
+
+    @media (max-width: 768px) {
+        
+    }
+
+    @media (max-width: 480px) {
+        
+    }
+`;
+
 export const I = styled.div`
 
     @media (max-width: 1080px) {
