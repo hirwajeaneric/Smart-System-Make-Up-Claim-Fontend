@@ -1,16 +1,34 @@
 import React, { useEffect, useState } from 'react'
-import { CourseDivision, LecturerDivision, LecturerList, Page, PageContent, PageTitle } from '../../../components/styled-components/pageStyledComponents'
+import { CourseDivision, LecturerDivision, LecturerList, ModalLabel, Page, PageContent, PageTitle, Popup } from '../../../components/styled-components/pageStyledComponents'
 import { Helmet } from 'react-helmet-async'
 import CoursesTable from '../../../components/tables/CoursesTable'
 import axios from 'axios';
 import Apis from '../../../utils/Apis';
 import { useParams } from 'react-router-dom';
+import { Box, Modal, Typography } from '@mui/material';
+
+const style = {
+  position: 'absolute',
+  top: '0px',
+  right: '0px',
+  width: '30%',
+  bgcolor: 'background.paper',
+  border: 'none',
+  boxShadow: 24,
+  height: '100%',
+  p: 4,
+};
 
 const CoursesAllocation = () => {
   const params = useParams();
   const [data, setData] = useState([]);
   const [lecturers, setLecturers] = useState([]);
+  const [lecturer, setLecturer] = useState({});
   const [sysUser, setSysUser] = useState({});
+  const [open, setOpen] = useState(false);
+  
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     let user = '';
@@ -77,7 +95,7 @@ const CoursesAllocation = () => {
             <LecturerList>
               {lecturers.map((item, index) => (
                   <li key={index}>
-                    <button type='button'>{item.fullName}</button>
+                    <button type='button' onClick={() => {setLecturer(item); handleOpen();}}>{item.fullName}</button>
                   </li>
                 ))
               } 
@@ -87,6 +105,36 @@ const CoursesAllocation = () => {
           }
         </LecturerDivision>
       </PageContent>
+
+      {/* Modal displaying lecturer information  */}
+      <Modal sx={{ height: '100%' }} open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+        <Popup>
+          <Typography id="modal-modal-title" variant="h4" component="h1">Lecturer Information</Typography>
+          <br/>
+          <hr/>
+          <br/>
+          <br/>
+          <ModalLabel>Name:</ModalLabel>
+          <Typography id="modal-modal-title" variant="h5" component="h2">
+            {lecturer.fullName}
+          </Typography>
+          <br/>
+          <ModalLabel>Email:</ModalLabel>
+          <p>{lecturer.email}</p>
+          <br/>
+          <ModalLabel>Phone:</ModalLabel>
+          <p>+{lecturer.phone}</p>
+          <br/>
+          <ModalLabel>Courses:</ModalLabel>
+          {/* {lecturer.courses !== 0 ? 
+            lecturer.courses.map((element, index) => (
+              <p key={index}>{element.courseName}</p>
+            ))
+           : 
+           <p>Lecturer has no courses</p>
+          } */}
+        </Popup>
+      </Modal>
     </Page>
   )
 }

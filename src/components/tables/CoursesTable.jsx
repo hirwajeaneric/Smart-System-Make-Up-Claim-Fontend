@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { DataGrid, GridToolbarContainer, GridToolbarExport } from '@mui/x-data-grid';
 import { Box, IconButton, Tooltip } from '@mui/material';
 import { Preview } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 
 const columns = [
   {   
@@ -69,19 +70,15 @@ export default CoursesTable;
 
 // Table actions
 const TableActions = ({params}) => {
-  // const setShowModal = useContext(ShowModalContextSetter);
-  // const setPayLoad = useContext(PopupPayLoadContextSetter);
-
-  const openModal = ()=> {
-    // setShowModal(prev => !prev);
-    // setPayLoad({ type: 'id', id: params.row._id})
-  };
+  const navigate = useNavigate();
 
   return (
     <Box>
       <Tooltip title='View / Edit'>
-        <IconButton onClick={openModal}>
-        <Preview />
+        <IconButton onClick={() => {  
+          navigate(`../course/${params.id}`);
+          }}>
+          <Preview />
         </IconButton>
       </Tooltip>
     </Box>

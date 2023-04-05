@@ -1,3 +1,4 @@
+import { Box, Modal } from '@mui/material';
 import styled from 'styled-components';
 
 export const SectionOrPageContainer = styled.div`
@@ -157,6 +158,7 @@ export const LecturerList = styled.ul`
     li {
         width: 100%;
         border-bottom: 1px solid gray;
+        font-weight: bold;
 
         &:hover {
             background: #ebf0fa;
@@ -185,7 +187,9 @@ export const LecturerList = styled.ul`
     }
 `;
 
-export const H = styled.div`
+export const ModalLabel = styled.label`
+    color: gray;
+    font-size: 95%;
 
     @media (max-width: 1080px) {
             
@@ -197,6 +201,36 @@ export const H = styled.div`
 
     @media (max-width: 480px) {
         
+    }
+`;
+
+export const Popup = styled(Box)`
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 50%;
+    background-color: white;
+    border: none;
+    box-shadow: 24px;
+    height: 100%;
+    padding: 50px;
+
+    @media (max-width: 1080px) {
+            
+    }
+
+    @media (max-width: 991px) {
+        width: 50%;
+    }
+
+    @media (max-width: 768px) {
+        width: 60%;
+        padding: 40px;
+    }
+
+    @media (max-width: 480px) {
+        width: 80%;
+        padding: 20px;
     }
 `;
 
