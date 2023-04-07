@@ -393,10 +393,145 @@ export const ListOfSemesters = styled.div`
 
 export const SemesterLecturerContainer = styled.div`
     padding: 10px;
-    background: #ebebe0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    background: #cce6ff;
     margin-top: 10px;
-    border: 1px solid #d6d6c2;
+    border: 1px solid #3399ff;
+    width: 100%;
+    min-height: 250px;
+
+    @media (max-width: 1080px) {
+            
+    }
+
+    @media (max-width: 768px) {
+        
+    }
+
+    @media (max-width: 480px) {
+        
+    }
+`;
+
+export const LecturerSelection = styled.div`
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-start;
+    border-radius: 20px;
+    border: 1px solid #3399ff;
+    background: #90caf9;
     font-size: 90%;
+
+    svg {
+        cursor: pointer;
+    }
+
+    @media (max-width: 1080px) {
+            
+    }
+
+    @media (max-width: 768px) {
+        
+    }
+
+    @media (max-width: 480px) {
+        
+    }
+`;
+
+export const LecturerSelectionThree = styled.div`
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    border-radius: 10px;
+    border: 1px solid #ffc34d;
+    background: #ffe6b3;
+    font-size: 90%;
+    
+    div {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        width: 100%;
+    }
+
+    div {
+        button {
+            background: #ffbb33;
+            border: none;
+            border-radius: 5px;
+            padding: 2px 5px;
+        }
+    }
+
+    svg {
+        cursor: pointer;
+    }
+
+    @media (max-width: 1080px) {
+            
+    }
+
+    @media (max-width: 768px) {
+        
+    }
+
+    @media (max-width: 480px) {
+        
+    }
+`;
+
+export const ListOfLecturerToChoose = styled.div`
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 3px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    background: white;
+    margin-top: 10px;
+    border: 1px solid #3399ff;
+    width: 100%;
+    min-height: 250px;
+
+    @media (max-width: 1080px) {
+            
+    }
+
+    @media (max-width: 768px) {
+        
+    }
+
+    @media (max-width: 480px) {
+        
+    }
+`;
+
+export const LecturerSelectionTwo = styled.div`
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background: #90caf9;
+    font-size: 90%;
+    width: 100%;
+
+    svg {
+        cursor: pointer;
+    }
 
     @media (max-width: 1080px) {
             

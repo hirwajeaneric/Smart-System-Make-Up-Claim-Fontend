@@ -76,7 +76,8 @@ const TableActions = ({params}) => {
     <Box>
       <Tooltip title='View / Edit'>
         <IconButton onClick={() => {  
-          navigate(`../course/${params.id}`);
+          console.log(params);
+          navigate(`../course/${params.row.code}`);
           }}>
           <Preview />
         </IconButton>
