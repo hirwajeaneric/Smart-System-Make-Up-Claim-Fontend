@@ -421,6 +421,7 @@ export const LecturerSelection = styled.div`
     padding: 5px;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     gap: 10px;
     align-items: center;
     justify-content: flex-start;
@@ -428,6 +429,19 @@ export const LecturerSelection = styled.div`
     border: 1px solid #3399ff;
     background: #90caf9;
     font-size: 90%;
+
+    button {
+        background: blue;
+        border: none;
+        border-radius: 5px;
+        padding: 2px 5px;
+        color: white;
+        cursor: pointer;
+
+        &:hover {
+            color: black;
+        }
+    }
 
     svg {
         cursor: pointer;
@@ -464,6 +478,26 @@ export const LecturerSelectionThree = styled.div`
         justify-content: space-between;
         gap: 20px;
         width: 100%;
+
+        form {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            width: 100%;
+            
+            div {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                align-items: center;
+                justify-content: flex-start;
+                gap: 5px;
+                width: 10%;
+            }
+        }
     }
 
     div {
@@ -472,6 +506,11 @@ export const LecturerSelectionThree = styled.div`
             border: none;
             border-radius: 5px;
             padding: 2px 5px;
+            cursor: pointer;
+
+            &:hover {
+                color: white;
+            }
         }
     }
 

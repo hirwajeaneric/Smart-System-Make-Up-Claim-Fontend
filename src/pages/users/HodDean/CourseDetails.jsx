@@ -48,19 +48,8 @@ const CourseDetails = () => {
     if (isPresent === true) {
       console.log('lecturer already in');  
     } else {
-      setAddedLecturer({
-        lecturer: {
-          lecturerId: lecturer._id, 
-          name: lecturer.fullName}, 
-        addCommand: true
-      });
-
-      console.log({lecturerId: lecturer._id, name: lecturer.fullName});
+      setAddedLecturer({ lecturerId: lecturer._id, name: lecturer.fullName });
     }; 
-  }
-
-  const addCourse = () => {
-    // console.log(course.allocations);
   }
 
   return (
@@ -109,7 +98,7 @@ const CourseDetails = () => {
                   key={index}
                   >
                   {element.fullName}
-                  <MdOutlineAdd onClick={(e) => { e.preventDefault(); chooseLecturer(element); addCourse();}}/>
+                  <MdOutlineAdd onClick={(e) => { e.preventDefault(); chooseLecturer(element);}}/>
                 </LecturerSelectionTwo>
               ))}
             </ListOfLecturerToChoose>
