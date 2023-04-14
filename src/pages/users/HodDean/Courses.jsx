@@ -19,9 +19,9 @@ const style = {
   p: 4,
 };
 
-const CoursesAllocation = () => {
+export default function Courses() {
   const params = useParams();
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({});
   const [lecturers, setLecturers] = useState([]);
   const [lecturer, setLecturer] = useState({});
   const [sysUser, setSysUser] = useState({});
@@ -48,6 +48,9 @@ const CoursesAllocation = () => {
       user = JSON.parse(localStorage.getItem('accInfo'));
     }
     setSysUser(user);
+
+    localStorage.removeItem('lectureDetails');
+    localStorage.removeItem('courseAllocation');
 
     // Fetch a list of lecturers
     axios.get(`${Apis.userApis.list}`)
@@ -138,5 +141,3 @@ const CoursesAllocation = () => {
     </Page>
   )
 }
-
-export default CoursesAllocation

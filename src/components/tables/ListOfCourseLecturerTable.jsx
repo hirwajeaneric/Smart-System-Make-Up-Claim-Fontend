@@ -1,8 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { DataGrid, GridToolbarContainer, GridToolbarExport } from '@mui/x-data-grid';
 import { Box, IconButton, Tooltip } from '@mui/material';
 import { Preview } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { TableStyles } from './CourseAllocationsTable';
 
 const columns = [
   {   
@@ -13,26 +14,17 @@ const columns = [
   {
       field: 'name',
       headerName: 'Name',
-      width: 250,
+      width: 180,
   },
   {
-      field: 'code',
-      headerName: 'Code',
-      width: 130,
-  },{
-      field: 'credits',
-      headerName: 'Credits',
-      width: 70,
-  },
-  {
-      field: 'department',
-      headerName: 'Department',
-      width: 200,
+      field: 'groups',
+      headerName: 'Groups',
+      width: 180,
   },{
       field: 'actions',
       headerName: 'Actions',
       type: 'actions',
-      width: 70,
+      width: 180,
       renderCell: (params) => <TableActions params= {params} />
   },
 ]
@@ -46,15 +38,32 @@ function CustomToolbar() {
 }
 
 var rows = [];
+var courseInfo = {};
 
-const CoursesTable = ({data}) => {
-  rows = data;
-  
+export default function ListOfCourseLecturerTable() {
+  const params = useParams();
+  const data = JSON.parse(localStorage.getItem('courseAllocation'));
+
+  if (data) {
+    const {allocation, otherCourseInfo} = data;
+    courseInfo = otherCourseInfo;
+    if (otherCourseInfo.code === params.courseCode) {
+      allocation.lecturers.forEach(element => {
+        element.id = element._id;
+      });
+      rows = allocation.lecturers;
+    } else {
+      rows = [];
+    }
+  } else {
+    rows = [];
+  }
+
   return (
-    <Box sx={{height: 350, width:'100%'}}>
+    <Box sx={TableStyles}>
       <DataGrid 
-        rows={rows}
         rowHeight={38}
+        rows={rows}
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}
@@ -65,9 +74,7 @@ const CoursesTable = ({data}) => {
     </Box>
       
   );
-}
-
-export default CoursesTable;
+};
 
 // Table actions
 const TableActions = ({params}) => {
@@ -77,8 +84,8 @@ const TableActions = ({params}) => {
     <Box>
       <Tooltip title='View / Edit'>
         <IconButton onClick={() => {  
-          console.log(params);
-          navigate(`../course/${params.row.code}`);
+          localStorage.setItem('lectureDetails', JSON.stringify({lecturer: params.row, otherCourseInfo: courseInfo }));
+          window.location.reload();
           }}>
           <Preview />
         </IconButton>

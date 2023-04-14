@@ -1,4 +1,4 @@
-import { Box, Modal } from '@mui/material';
+import { Box } from '@mui/material';
 import styled from 'styled-components';
 
 export const SectionOrPageContainer = styled.div`
@@ -235,13 +235,27 @@ export const Popup = styled(Box)`
 `;
 
 export const TopCourseInformation = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;    
+    flex-wrap: wrap;
+
     div {
         display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        width: 100%;
-        align-items: center;
-        gap: 20px;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        
+        div {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            width: 100%;
+            align-items: center;
+            gap: 20px;
+        }
     }
 
     @media (max-width: 1080px) {
@@ -262,16 +276,22 @@ export const CourseManagementContainer = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 100%;
     align-items: flex-start;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    // gap: 20px;
+    border: 1px solid #c2d1f0;
+    border-radius: 8px;
 
     @media (max-width: 1080px) {
             
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 991px) {
         
+    }
+
+    @media (max-width: 768px) {
+        flex-wrap: wrap;
     }
 
     @media (max-width: 480px) {
@@ -279,9 +299,50 @@ export const CourseManagementContainer = styled.div`
     }
 `;
 
-export const Semesters = styled.div`
-    width: 33%;
-    margin-bottom: 20px;
+export const CustomTableContainer = styled.div`
+    borderRadius: 8px;
+    width: 100%;
+
+    h4 {
+        padding: 15px 15px 0;
+    }
+
+    @media (max-width: 1080px) {
+            
+    }
+
+    @media (max-width: 991px) {
+        
+    }
+
+    @media (max-width: 768px) {
+     
+    }
+
+    @media (max-width: 480px) {
+        
+    }
+`;
+
+export const DetailsForAllocatedLecturer = styled.div`
+    padding: 15px;
+    width: 100%;
+
+    div {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+
+        div {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-start;            
+        }
+    }
 
     h4 {
         margin-bottom: 10px;
@@ -292,7 +353,7 @@ export const Semesters = styled.div`
     }
 
     @media (max-width: 991px) {
-        width: 100%;
+        
     }
 
     @media (max-width: 768px) {
@@ -317,7 +378,7 @@ export const Lecturers = styled.div`
     }
 
     @media (max-width: 991px) {
-        width: 100%;
+        
     }
 
     @media (max-width: 768px) {
@@ -354,28 +415,15 @@ export const ChooseLecturers = styled.div`
     }
 `;
 
-export const ListOfSemesters = styled.div`
-    a {
-        margin-top: 10px;
-        font-size: 90%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        width: 100%;
-        align-items: center;
-        padding: 5px;
-        background: #90caf9;
-        border-bottom: 1px solid gray;
-        text-decoration: none;
+export const SmallButton = styled.button`
+    padding: 2px 10px;
+    border: none;
+    color: white;
+    background: green;
+    cursor: pointer;
+
+    &:hover {
         color: black;
-
-        &:hover {
-            background: white-smoke;
-        }
-
-        &.active {
-            background: white;
-        }
     }
 
     @media (max-width: 1080px) {
@@ -391,18 +439,7 @@ export const ListOfSemesters = styled.div`
     }
 `;
 
-export const SemesterLecturerContainer = styled.div`
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: flex-start;
-    justify-content: flex-start;
-    background: #cce6ff;
-    margin-top: 10px;
-    border: 1px solid #3399ff;
-    width: 100%;
-    min-height: 250px;
+export const a = styled.div`
 
     @media (max-width: 1080px) {
             
@@ -417,175 +454,7 @@ export const SemesterLecturerContainer = styled.div`
     }
 `;
 
-export const LecturerSelection = styled.div`
-    padding: 5px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 10px;
-    align-items: center;
-    justify-content: flex-start;
-    border-radius: 20px;
-    border: 1px solid #3399ff;
-    background: #90caf9;
-    font-size: 90%;
-
-    button {
-        background: blue;
-        border: none;
-        border-radius: 5px;
-        padding: 2px 5px;
-        color: white;
-        cursor: pointer;
-
-        &:hover {
-            color: black;
-        }
-    }
-
-    svg {
-        cursor: pointer;
-    }
-
-    @media (max-width: 1080px) {
-            
-    }
-
-    @media (max-width: 768px) {
-        
-    }
-
-    @media (max-width: 480px) {
-        
-    }
-`;
-
-export const LecturerSelectionThree = styled.div`
-    padding: 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    border-radius: 10px;
-    border: 1px solid #ffc34d;
-    background: #ffe6b3;
-    font-size: 90%;
-    
-    div {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        gap: 20px;
-        width: 100%;
-
-        form {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            gap: 15px;
-            width: 100%;
-            
-            div {
-                display: flex;
-                flex-direction: row;
-                flex-wrap: nowrap;
-                align-items: center;
-                justify-content: flex-start;
-                gap: 5px;
-                width: 10%;
-            }
-        }
-    }
-
-    div {
-        button {
-            background: #ffbb33;
-            border: none;
-            border-radius: 5px;
-            padding: 2px 5px;
-            cursor: pointer;
-
-            &:hover {
-                color: white;
-            }
-        }
-    }
-
-    svg {
-        cursor: pointer;
-    }
-
-    @media (max-width: 1080px) {
-            
-    }
-
-    @media (max-width: 768px) {
-        
-    }
-
-    @media (max-width: 480px) {
-        
-    }
-`;
-
-export const ListOfLecturerToChoose = styled.div`
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    gap: 3px;
-    align-items: flex-start;
-    justify-content: flex-start;
-    background: white;
-    margin-top: 10px;
-    border: 1px solid #3399ff;
-    width: 100%;
-    min-height: 250px;
-
-    @media (max-width: 1080px) {
-            
-    }
-
-    @media (max-width: 768px) {
-        
-    }
-
-    @media (max-width: 480px) {
-        
-    }
-`;
-
-export const LecturerSelectionTwo = styled.div`
-    padding: 5px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    background: #90caf9;
-    font-size: 90%;
-    width: 100%;
-
-    svg {
-        cursor: pointer;
-    }
-
-    @media (max-width: 1080px) {
-            
-    }
-
-    @media (max-width: 768px) {
-        
-    }
-
-    @media (max-width: 480px) {
-        
-    }
-`;
-
-export const I = styled.div`
+export const b = styled.div`
 
     @media (max-width: 1080px) {
             
