@@ -11,28 +11,19 @@ const columns = [
       hide:true
   },
   {
-      field: 'name',
-      headerName: 'Name',
-      width: 250,
+      field: 'academicYear',
+      headerName: 'Academic Year',
+      width: 180,
   },
   {
-      field: 'code',
-      headerName: 'Code',
-      width: 130,
-  },{
-      field: 'credits',
-      headerName: 'Credits',
-      width: 70,
-  },
-  {
-      field: 'department',
-      headerName: 'Department',
-      width: 200,
+      field: 'semester',
+      headerName: 'Semester',
+      width: 180,
   },{
       field: 'actions',
       headerName: 'Actions',
       type: 'actions',
-      width: 70,
+      width: 180,
       renderCell: (params) => <TableActions params= {params} />
   },
 ]
@@ -45,16 +36,29 @@ function CustomToolbar() {
   );
 }
 
-var rows = [];
+export const TableStyles = {
+  padding: '15px',
+  width: '100%',
+  height: '350px'
+}
 
-const CoursesTable = ({data}) => {
-  rows = data;
+var rows = [];
+var course = {};
+
+export default function CourseAllocationsTable({data}) {
+  course = data;
+
+  data.allocations.forEach(element => {
+    element.id = element._id;
+  });
+
+  rows = data.allocations;
   
   return (
-    <Box sx={{height: 350, width:'100%'}}>
-      <DataGrid 
-        rows={rows}
+    <Box sx={TableStyles}>
+      <DataGrid
         rowHeight={38}
+        rows={rows}
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}
@@ -65,20 +69,16 @@ const CoursesTable = ({data}) => {
     </Box>
       
   );
-}
-
-export default CoursesTable;
+};
 
 // Table actions
 const TableActions = ({params}) => {
-  const navigate = useNavigate();
-
   return (
     <Box>
       <Tooltip title='View / Edit'>
         <IconButton onClick={() => {  
-          console.log(params);
-          navigate(`../course/${params.row.code}`);
+          localStorage.setItem('courseAllocation', JSON.stringify({allocation: params.row, otherCourseInfo: course}));
+          window.location.reload();
           }}>
           <Preview />
         </IconButton>

@@ -31,7 +31,7 @@ import LecturerSettings from './pages/users/Lecturer/Settings';
 // Hod Pages
 import HodAccount from './pages/users/HodDean/Index';
 import HodHome from './pages/users/HodDean/Home';
-import CoursesAllocation from './pages/users/HodDean/CoursesAllocation';
+import CoursesAllocation from './pages/users/HodDean/Courses';
 import HodReport from './pages/users/HodDean/Report';
 import HodSettings from './pages/users/HodDean/Settings';
 

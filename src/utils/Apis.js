@@ -1,5 +1,8 @@
-const domain = '192.168.43.16';
-const mainAddress =  `http://${domain || process.env.REACT_APP_DOMAIN}:${process.env.REACT_APP_BACKEND_SERVER_PORT}/api/v1/ssmec`
+const BACKEND_DOMAIN = '';
+const BACKEND_PORT = '5555'
+// const BACKEND_PORT = ''
+// const BACKEND_DOMAIN = '192.168.43.16';
+const mainAddress =  `http://${BACKEND_DOMAIN || 'localhost'}:${BACKEND_PORT}/api/v1/ssmec`
 
 let Apis = {
     userApis: {
