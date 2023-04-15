@@ -38,7 +38,7 @@ function CustomToolbar() {
 }
 
 var rows = [];
-var courseInfo = {};
+var theAllocation = {};
 
 export default function ListOfCourseLecturerTable() {
   const params = useParams();
@@ -46,7 +46,8 @@ export default function ListOfCourseLecturerTable() {
 
   if (data) {
     const {allocation, otherCourseInfo} = data;
-    courseInfo = otherCourseInfo;
+    theAllocation = allocation;
+    
     if (otherCourseInfo.code === params.courseCode) {
       allocation.lecturers.forEach(element => {
         element.id = element._id;
@@ -84,7 +85,7 @@ const TableActions = ({params}) => {
     <Box>
       <Tooltip title='View / Edit'>
         <IconButton onClick={() => {  
-          localStorage.setItem('lectureDetails', JSON.stringify({lecturer: params.row, otherCourseInfo: courseInfo }));
+          localStorage.setItem('lectureDetails', JSON.stringify({lecturer: params.row, allocation: theAllocation }));
           window.location.reload();
           }}>
           <Preview />

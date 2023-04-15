@@ -1,10 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { CourseManagementContainer, CustomTableContainer, DetailsForAllocatedLecturer, Page, PageContent, PageTitle, SmallButton, TopCourseInformation } from '../../../components/styled-components/pageStyledComponents'
+import { CourseManagementContainer, CustomTableContainer, DetailsForAllocatedLecturer, Page, PageContent, PageTitle, TopCourseInformation } from '../../../components/styled-components/pageStyledComponents'
 import { Helmet } from 'react-helmet-async'
 import axios from 'axios';
 import APIS from '../../../utils/Apis';
 import { useParams } from 'react-router-dom';
-import { AddedLecturerSetterContext } from '../../../App';
 import CourseAllocationsTable from '../../../components/tables/CourseAllocationsTable';
 import ListOfCourseLecturerTable from '../../../components/tables/ListOfCourseLecturerTable';
 import { Button, FormControl, InputLabel, MenuItem, OutlinedInput } from '@mui/material';
@@ -16,52 +15,41 @@ const ITEM_PADDING_TOP = 8;
 const MenuProps = {
   PaperProps: {
     style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP, width: 250,
     },
   },
 };
 
-const names = ['A', 'B', 'C', 'D', 'E'];
-
-function getStyles(name, personName, theme) {
-  return {
-    fontWeight:
-      personName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
-  };
-}
+const groups = ['A', 'B', 'C', 'D', 'E'];
 
 const CourseDetails = () => {
   const theme = useTheme();
   const params = useParams();
-  const setAddedLecturer = useContext(AddedLecturerSetterContext);
   
   const [course, setCourse] = useState({code:"", name: "", credits: "", faculty: "", department: "", allocations: []});
   const [lecturers, setLecturers] = useState([]);
   const [lecturerInfo, setLecturerInfo] = useState({});
   const [addOption, setAddOption] = useState(false);
+  const [age, setAge] = useState('');
+  const [personName, setPersonName] = useState([]);
+  const [listOfGroups, setListOfGroups] = useState([]);
+  const [courseAllocation, setCourseAllocation] = useState({});
 
+  // Lecturer info
   useEffect(() => {
     let localData = JSON.parse(localStorage.getItem('lectureDetails'));
     let lec = {};
     if (localData) {
-      const { lecturer, otherCourseInfo } = localData;
-      // console.log(localData);
-      if (otherCourseInfo.code === params.courseCode) {
-        lec = lecturer;
-      } else {
-        lec = {};
-      }
+      const { lecturer, allocation } = localData;
+      setCourseAllocation(allocation);
+      lec = lecturer;
+
     } else {
       lec = {};
     }
     setLecturerInfo(lec);
-    console.log(lec);
   }, [params]);
   
-
   // Find Course by course code
   useEffect(()=>{
     axios.get(APIS.courseApis.findByCode+params.courseCode)
@@ -83,45 +71,43 @@ const CourseDetails = () => {
     .catch(error => console.log(error))
   }, [])
   
-  // Adding lecturers to selected lecturers 
-  const chooseLecturer = (lecturer) => {
-    var theCourse = {};
-    course.allocations.forEach(element => {
-      if (element.semester === params.number && element.academicYear === params.academicYear) {
-        theCourse = element;
-      }
-    });
-
-    // Verifying whether the selected lecture isn't already selected.
-    let isPresent = false;
-    theCourse.lecturers.forEach(element => {
-      if (element.lecturerId === lecturer._id) { isPresent = true } else { isPresent = false }
-    });
-    
-    if (isPresent === true) {
-      console.log('lecturer already in');  
-    } else {
-      setAddedLecturer({ lecturerId: lecturer._id, name: lecturer.fullName });
-    }; 
-  }
-
-  const [age, setAge] = React.useState('');
-
   const handleChange = (event) => {
     setAge(event.target.value);
   };
 
-  const [personName, setPersonName] = React.useState([]);
-
   const handleMultipleSelectionChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setPersonName(
+    const { target: { value },} = event;
+    setListOfGroups(
       // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value,
     );
   };
+
+  const removeLecturer = (e) => {
+    e.preventDefault();
+  
+    let previousCourseAllocationList = course.allocations;
+    let updatedCourseAllocation = courseAllocation;
+    let newAllocationList = [];
+    let updatedCourseInfo = course;
+
+    let filteredLecturerList = courseAllocation.lecturers.filter(lecturer => lecturer.lecturerId !== lecturerInfo.lecturerId)
+    setCourseAllocation({...courseAllocation, lecturers: filteredLecturerList});
+    updatedCourseAllocation.lecturers = filteredLecturerList;
+
+    previousCourseAllocationList.forEach(allo => {
+      if (allo._id === updatedCourseAllocation._id) {
+        allo = updatedCourseAllocation;
+        newAllocationList.push(updatedCourseAllocation);
+      } else {
+        newAllocationList.push(allo);
+      }
+    })
+    
+    updatedCourseInfo.allocations = newAllocationList;
+    console.log(updatedCourseInfo);
+
+  }
 
   return (
     <Page>
@@ -140,7 +126,7 @@ const CourseDetails = () => {
             <div><p>Code:</p><h3>{course.code}</h3></div>
           </div>
           <div>
-            <Button variant='contained' color='info' size='small' onClick={()=> {setAddOption(true);}}>Add lecturer</Button>
+            {/* <Button variant='contained' color='info' size='small' onClick={()=> {setAddOption(true);}}>Add lecturer</Button> */}
           </div>
         </TopCourseInformation>
         
@@ -179,31 +165,30 @@ const CourseDetails = () => {
                       <MenuItem value="">
                         <em>None</em>
                       </MenuItem>
-                      <MenuItem value={10}>Ten</MenuItem>
-                      <MenuItem value={20}>Twenty</MenuItem>
-                      <MenuItem value={30}>Thirty</MenuItem>
+                      {lecturers.map((element) => (
+                        <MenuItem
+                          key={element.fullName}
+                          value={element.fullName}
+                        >
+                          {element.fullName}
+                        </MenuItem>
+                      ))}
                     </Select>
                   </FormControl>
 
                   <FormControl sx={{ width: '100%'}} size="small">
-                    <InputLabel id="demo-multiple-name-label">Groups</InputLabel>
+                    <InputLabel id="groups">Groups</InputLabel>
                     <Select
-                      labelId="demo-multiple-name-label"
-                      id="demo-multiple-name"
+                      labelId="groups"
+                      id="groups"
                       multiple
-                      value={personName}
+                      value={listOfGroups}
                       onChange={handleMultipleSelectionChange}
                       input={<OutlinedInput label="Name" />}
                       MenuProps={MenuProps}
                     >
-                      {names.map((name) => (
-                        <MenuItem
-                          key={name}
-                          value={name}
-                          style={getStyles(name, personName, theme)}
-                        >
-                          {name}
-                        </MenuItem>
+                      {groups.map((group) => (
+                        <MenuItem key={group} value={group}>{group}</MenuItem>
                       ))}
                     </Select>
                   </FormControl>
@@ -215,11 +200,11 @@ const CourseDetails = () => {
                 </>
                 }
                 <div style={{ marginTop: '20px' }}>
-                  {addOption 
+                  {/* {addOption 
                     ? <Button variant='contained' color='success' size='small'>Confirm</Button> 
                     :<Button variant='contained' color='success' size='small'>Update</Button>
-                  }
-                  <Button variant='contained' color='error' size='small'>Delete</Button>
+                  } */}
+                  <Button variant='contained' color='error' size='small' onClick={removeLecturer}>Delete</Button>
                 </div>
               </div>
             </DetailsForAllocatedLecturer>

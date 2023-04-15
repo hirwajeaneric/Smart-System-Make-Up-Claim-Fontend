@@ -1,7 +1,7 @@
-const BACKEND_DOMAIN = '';
+// const BACKEND_DOMAIN = '';
 const BACKEND_PORT = '5555'
 // const BACKEND_PORT = ''
-// const BACKEND_DOMAIN = '192.168.43.16';
+const BACKEND_DOMAIN = '192.168.43.16';
 const mainAddress =  `http://${BACKEND_DOMAIN || 'localhost'}:${BACKEND_PORT}/api/v1/ssmec`
 
 let Apis = {
