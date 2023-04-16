@@ -175,8 +175,8 @@ const CourseDetails = () => {
   return (
     <Page>
       <Helmet>
-        <title>Hod/Dean - Course Information</title>
-        <meta name="description" content="Hod/Dean's courses allocation page."/> 
+        <title>Lecturer - Course Information</title>
+        <meta name="description" content="Lecturer's courses allocation page."/> 
       </Helmet>
       <PageTitle>
         <h2>Course Details</h2>

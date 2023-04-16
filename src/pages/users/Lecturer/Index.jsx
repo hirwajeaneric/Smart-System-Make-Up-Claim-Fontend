@@ -1,13 +1,15 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import NavigationBar from '../../../components/sections/NavigationBar';
+import { SectionOrPageContainer } from '../../../components/styled-components/pageStyledComponents';
 
 const Index = () => {
   return (
     <div>
         <NavigationBar />
-        <h1>Welcome home Lecturer</h1>
-        <Outlet />
+        <SectionOrPageContainer>
+          <Outlet />
+        </SectionOrPageContainer>
     </div>
   )
 }

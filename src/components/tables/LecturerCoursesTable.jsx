@@ -2,8 +2,7 @@ import React from 'react';
 import { DataGrid, GridToolbarContainer, GridToolbarExport } from '@mui/x-data-grid';
 import { Box, IconButton, Tooltip } from '@mui/material';
 import { Preview } from '@mui/icons-material';
-import { useNavigate, useParams } from 'react-router-dom';
-import { TableStyles } from './CourseAllocationsTable';
+import { useNavigate } from 'react-router-dom';
 
 const columns = [
   {   
@@ -14,17 +13,26 @@ const columns = [
   {
       field: 'name',
       headerName: 'Name',
-      width: 180,
+      width: 250,
   },
   {
-      field: 'groups',
-      headerName: 'Groups',
-      width: 180,
+      field: 'code',
+      headerName: 'Code',
+      width: 250,
+  },{
+      field: 'credits',
+      headerName: 'Credits',
+      width: 250,
+  },
+  {
+      field: 'department',
+      headerName: 'Department',
+      width: 250,
   },{
       field: 'actions',
       headerName: 'Actions',
       type: 'actions',
-      width: 180,
+      width: 70,
       renderCell: (params) => <TableActions params= {params} />
   },
 ]
@@ -38,33 +46,15 @@ function CustomToolbar() {
 }
 
 var rows = [];
-var theAllocation = {};
 
-export default function ListOfCourseLecturerTable() {
-  const params = useParams();
-  const data = JSON.parse(localStorage.getItem('courseAllocation'));
-
-  if (data) {
-    const {allocation, otherCourseInfo} = data;
-    theAllocation = allocation;
-    
-    if (otherCourseInfo.code === params.courseCode) {
-      allocation.lecturers.forEach(element => {
-        element.id = element._id;
-      });
-      rows = allocation.lecturers;
-    } else {
-      rows = [];
-    }
-  } else {
-    rows = [];
-  }
-
+export default function LecturerCoursesTable({data}) {
+  rows = data;
+  
   return (
-    <Box sx={TableStyles}>
+    <Box sx={{height: 350, width:'100%'}}>
       <DataGrid 
-        rowHeight={38}
         rows={rows}
+        rowHeight={38}
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}
@@ -75,7 +65,7 @@ export default function ListOfCourseLecturerTable() {
     </Box>
       
   );
-};
+}
 
 // Table actions
 const TableActions = ({params}) => {
@@ -85,8 +75,8 @@ const TableActions = ({params}) => {
     <Box>
       <Tooltip title='View / Edit'>
         <IconButton onClick={() => {  
-          localStorage.setItem('lectureDetails', JSON.stringify({lecturer: params.row, allocation: theAllocation }));
-          window.location.reload();
+          console.log(params);
+          navigate(`../course/${params.row.code}`);
           }}>
           <Preview />
         </IconButton>
