@@ -439,6 +439,91 @@ export const SmallButton = styled.button`
     }
 `;
 
+export const CourseListContainer = styled.div`
+    margin-top: 10px;
+    padding: 10px;
+    background: #f0f0f1;
+    width: 100%;
+    font-size: 90%;
+    min-height: 300px;
+    height: 300px;
+
+    @media (max-width: 1080px) {
+            
+    }
+
+    @media (max-width: 768px) {
+        
+    }
+
+    @media (max-width: 480px) {
+        
+    }
+`;
+
+export const CourseList = styled.ul`
+    list-style-type: none;
+    overflow-y: scroll;
+    max-height: 280px;
+
+    @media (max-width: 1080px) {
+            
+    }
+
+    @media (max-width: 768px) {
+        
+    }
+
+    @media (max-width: 480px) {
+        
+    }
+`;
+
+export const CourseListItem = styled.li`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3px 0;
+    
+    &:hover {
+        background-color: whiteSmoke;
+    }
+
+    &:nth-child(even) {
+        background-color: white;
+        
+        &:hover {
+            background-color: whiteSmoke;
+        }   
+    }
+
+    span {
+        margin-left: 10px;
+        width: 60%;
+    }
+
+    strong {
+        width: 20%;
+    }
+
+    button {
+        width: 20%;
+    }
+
+    @media (max-width: 1080px) {
+            
+    }
+
+    @media (max-width: 768px) {
+        
+    }
+
+    @media (max-width: 480px) {
+        
+    }
+`;
+
 export const a = styled.div`
 
     @media (max-width: 1080px) {

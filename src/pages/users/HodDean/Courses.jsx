@@ -5,26 +5,13 @@ import CoursesTable from '../../../components/tables/CoursesTable'
 import axios from 'axios';
 import Apis from '../../../utils/Apis';
 import { useParams } from 'react-router-dom';
-import { Box, Modal, Typography } from '@mui/material';
-
-const style = {
-  position: 'absolute',
-  top: '0px',
-  right: '0px',
-  width: '30%',
-  bgcolor: 'background.paper',
-  border: 'none',
-  boxShadow: 24,
-  height: '100%',
-  p: 4,
-};
+import { Modal, Typography } from '@mui/material';
 
 export default function Courses() {
   const params = useParams();
   const [data, setData] = useState({});
   const [lecturers, setLecturers] = useState([]);
   const [lecturer, setLecturer] = useState({});
-  const [sysUser, setSysUser] = useState({});
   const [open, setOpen] = useState(false);
   
   const handleOpen = () => setOpen(true);
@@ -47,7 +34,6 @@ export default function Courses() {
     } else if (params.userType === 'a') {
       user = JSON.parse(localStorage.getItem('accInfo'));
     }
-    setSysUser(user);
 
     localStorage.removeItem('lectureDetails');
     localStorage.removeItem('courseAllocation');

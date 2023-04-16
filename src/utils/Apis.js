@@ -25,6 +25,7 @@ let Apis = {
         findByDepartment: `${mainAddress}/course/findByDepartment?department=`,
         findByFaculty: `${mainAddress}/course/findByFaculty?faculty=`,
         findByCode: `${mainAddress}/course/findByCode?code=`,
+        findByLecturerId: `${mainAddress}/course/findByLecturerId?lecturerId=`,
         findById: `${mainAddress}/course/findById?id=`,
         update: `${mainAddress}/course/update?id=`,
         delete: `${mainAddress}/course/delete?id=`,
