@@ -27,6 +27,7 @@ import LecturerAccount from './pages/users/Lecturer/Index';
 import LecturerHome from './pages/users/Lecturer/Home';
 import MyCourses from './pages/users/Lecturer/MyCourses';
 import LecturerSettings from './pages/users/Lecturer/Settings';
+import LecturerCourseDetails from './pages/users/Lecturer/CourseDetails.jsx';
 
 // Hod Pages
 import HodAccount from './pages/users/HodDean/Index';
@@ -104,6 +105,7 @@ function App() {
               <Route path='' element={localStorage.getItem("lecTkn") ? <LecturerHome /> : <Navigate replace to='/lecturer/l/auth/signin' />} />
               <Route path='settings' element={localStorage.getItem("lecTkn") ? <LecturerSettings /> : <Navigate replace to='/lecturer/l/auth/signin' />} />
               <Route path='my-courses' element={localStorage.getItem("lecTkn") ? <MyCourses /> : <Navigate replace to='/lecturer/l/auth/signin' />} />
+              <Route path='course/:courseCode' element={localStorage.getItem("hodTkn") ? <LecturerCourseDetails /> : <Navigate replace to='/hod/h/auth/signin' />} />
             </Route>
 
             {/* Hod Routes */}
@@ -111,9 +113,7 @@ function App() {
               <Route path='' element={localStorage.getItem("hodTkn") ? <HodHome /> : <Navigate replace to='/hod/h/auth/signin' />} />
               <Route path='settings' element={localStorage.getItem("hodTkn") ? <HodSettings /> : <Navigate replace to='/hod/h/auth/signin' />} />
               <Route path='courses' element={localStorage.getItem("hodTkn") ? <CoursesAllocation /> : <Navigate replace to='/hod/h/auth/signin' />} />
-              <Route path='course/:courseCode' element={localStorage.getItem("hodTkn") ? <CourseDetails /> : <Navigate replace to='/hod/h/auth/signin' />}>
-                <Route path='sem/:number/:academicYear' element={localStorage.getItem("hodTkn") ? <Semester /> : <Navigate replace to='/hod/h/auth/signin' />} />  
-              </Route>
+              <Route path='course/:courseCode' element={localStorage.getItem("hodTkn") ? <CourseDetails /> : <Navigate replace to='/hod/h/auth/signin' />} />
               <Route path='report-preview' element={localStorage.getItem("hodTkn") ? <HodReport /> : <Navigate replace to='/hod/h/auth/signin' />} />
             </Route>
 

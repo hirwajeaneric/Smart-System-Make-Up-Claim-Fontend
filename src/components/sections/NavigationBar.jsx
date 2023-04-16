@@ -107,6 +107,7 @@ const NavigationBar = () => {
           </LogoSpace>
           <NavigationLinks>
             <NavLink to={'./'}>Home</NavLink>
+            {sysUser.role === 'Lecturer' && <NavLink to={'my-courses'}>My Courses</NavLink>}
             {sysUser.role === 'Hod/Dean' && <NavLink to={'courses'}>Courses</NavLink>}
             {(sysUser.role === 'Hod/Dean' || sysUser.role === 'Examination officer') && <NavLink to={'report-preview'}>Reports</NavLink>}
             {sysUser.role === 'Student' && <NavLink to={'new-claim'}>New claim</NavLink>}
@@ -132,8 +133,7 @@ const NavigationBar = () => {
           </Tooltip>
         </TopBarRight>
         <Menu
-          anchorEl={anchorEl}
-          id="account-menu"
+          anchorEl={anchorEl} id="account-menu"
           open={open}
           onClose={handleClose}
           onClick={handleClose}
@@ -189,6 +189,7 @@ const NavigationBar = () => {
       {visible===true && <MobileNavigationLinks>
         <div>
           <NavLink to={'./'} onClick={() => setVisible(!visible)}>Home</NavLink>
+          {sysUser.role === 'Lecturer' && <NavLink to={'my-courses'}>My Courses</NavLink>}
           {sysUser.role === 'Student' && <NavLink to={'new-claim'}>New claim</NavLink>}
           {sysUser.role === 'Hod/Dean' && <NavLink to={'courses'} onClick={() => setVisible(!visible)}>Courses</NavLink>}
           {(sysUser.role === 'Hod/Dean' || sysUser.role === 'Examination officer') && <NavLink to={'report-preview'} onClick={() => setVisible(!visible)}>Reports</NavLink>}
