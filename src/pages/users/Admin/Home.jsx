@@ -6,10 +6,10 @@ const Home = () => {
   return (
     <Page>
       <Helmet>
-        <title>Hod/Dean - Home</title>
-        <meta name="description" content="Hod/Dean's home page."/> 
+        <title>Administrator - Dashboard home</title>
+        <meta name="description" content="Administrator's home page."/> 
       </Helmet>
-      Home
+      Dashboard home
     </Page>
   )
 }

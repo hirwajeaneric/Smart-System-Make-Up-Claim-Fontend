@@ -6,8 +6,8 @@ const Settings = () => {
   return (
     <Page>
       <Helmet>
-        <title>Hod/Dean - Account settings</title>
-        <meta name="description" content="Hod/Dean's user account settings page."/> 
+        <title>Administrator - Account settings</title>
+        <meta name="description" content="Administrator's user account settings page."/> 
       </Helmet>
       Settings
     </Page>

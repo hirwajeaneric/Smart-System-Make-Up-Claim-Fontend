@@ -6,8 +6,8 @@ const Report = () => {
   return (
     <Page>
       <Helmet>
-        <title>Hod/Dean - Report preview</title>
-        <meta name="description" content="Hod/Dean's report preview page."/> 
+        <title>Administrator - Report preview</title>
+        <meta name="description" content="Administrator's report preview page."/> 
       </Helmet>
       Report
     </Page>

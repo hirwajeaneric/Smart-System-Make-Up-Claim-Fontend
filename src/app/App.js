@@ -1,18 +1,18 @@
 import React, { createContext, useState } from 'react';
-import GlobalStyle from './globalStyles';
+import GlobalStyle from '../globalStyles';
 import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
 
 // General pages 
-import ErrorPage from './pages/ErrorPage';
-import StartingPage from './pages';
-import LandingPage from './pages/LandingPage';
+import ErrorPage from '../pages/ErrorPage';
+import StartingPage from '../pages';
+import LandingPage from '../pages/LandingPage';
 
 // Authentication pages
-import AuthentincationPage from './pages/auth';
-import Signup from './pages/auth/Signup';
-import Signin from './pages/auth/Signin';
-import ResetPassword from './pages/auth/ResetPassword';
-import RequestPasswordReset from './pages/auth/RequestPasswordReset';
+import AuthentincationPage from '../pages/auth';
+import Signup from '../pages/auth/Signup';
+import Signin from '../pages/auth/Signin';
+import ResetPassword from '../pages/auth/ResetPassword';
+import RequestPasswordReset from '../pages/auth/RequestPasswordReset';
 
 //Student Pages 
 import StudentAccount from './pages/users/Student/Index';
@@ -30,11 +30,11 @@ import LecturerSettings from './pages/users/Lecturer/Settings';
 import LecturerCourseDetails from './pages/users/Lecturer/CourseDetails.jsx';
 
 // Hod Pages
-import HodAccount from './pages/users/HodDean/Index';
-import HodHome from './pages/users/HodDean/Home';
-import CoursesAllocation from './pages/users/HodDean/Courses';
-import HodReport from './pages/users/HodDean/Report';
-import HodSettings from './pages/users/HodDean/Settings';
+import HodAccount from '../pages/users/HodDean/Index';
+import HodHome from '../pages/users/HodDean/Home';
+import CoursesAllocation from '../pages/users/HodDean/Courses';
+import HodReport from '../pages/users/HodDean/Report';
+import HodSettings from '../pages/users/HodDean/Settings';
 
 // Dod Pages
 import DodAccount from './pages/users/DirectorOfStudentDiscipline/Index';
@@ -47,19 +47,19 @@ import AccountantHome from './pages/users/Accountant/Home';
 import AccountantSettings from './pages/users/Accountant/Settings';
 
 // Examincation Officer Pages
-import ExOfficerAccount from './pages/users/ExaminationOfficer/Index';
-import ExOfficerHome from './pages/users/ExaminationOfficer/Home';
-import ExOfficerReport from './pages/users/ExaminationOfficer/Report';
-import ExOfficerSettings from './pages/users/ExaminationOfficer/Settings';
-import ExamsTimeTable from './pages/users/ExaminationOfficer/TimeTable';
+import ExOfficerAccount from '../pages/users/Client/Index';
+import ExOfficerHome from '../pages/users/Client/Home';
+import ExOfficerReport from '../pages/users/Client/NewBooking';
+import ExOfficerSettings from '../pages/users/Client/Settings';
+import ExamsTimeTable from '../pages/users/Client/TimeTable';
 
 // Registration officer Pages
 import RegOfficerAccount from './pages/users/RegistrationOfficer/Index';
 import RegOfficerHome from './pages/users/RegistrationOfficer/Home';
 import RegOfficerSettings from './pages/users/RegistrationOfficer/Settings';
 import SemesterTimeTable from './pages/users/RegistrationOfficer/SemesterTimeTable';
-import CourseDetails from './pages/users/HodDean/CourseDetails';
-import Semester from './pages/users/HodDean/Semester';
+import CourseDetails from '../pages/users/HodDean/CourseDetails';
+import Semester from '../pages/users/HodDean/Semester';
 
 export const AddedLecturerContext = createContext();
 export const AddedLecturerSetterContext = createContext();
