@@ -1,8 +1,8 @@
 import { Button, TextField } from '@mui/material';
-import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { AuthenticationPageContainer, AuthFormContainer, CommandButtons, InnerContainer } from '../../components/styled-components/authenticationPages'
-import Apis from '../../utils/Apis';
+import APIS from '../../utils/Apis';
 
 import InputLabel from '@mui/material/InputLabel';
 import IconButton from '@mui/material/IconButton';
@@ -20,13 +20,9 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-const Signin = () => {
-  // Hooks
-  const params = useParams();
-  
+const Signin = () => {  
   // States
   const [showPassword, setShowPassword] = React.useState(false);
-  const [sysUser, setSysUser] = useState('');
   const [formData, setFormData] = useState({ email: '', registrationNumber: 0, password: '' });
   const [progress, setProgress] = useState({ value: '', disabled: false});
   const [open, setOpen] = useState(false);
@@ -60,43 +56,16 @@ const Signin = () => {
     } else {
       setProgress({ value: 'Signing in ...', disabled: true});
 
-      axios.post(link, data)
+      axios.post(APIS.userApis.signIn, formData)
       .then(response => {
         setTimeout(()=>{
           if (response.status === 200) {
             const { token, ...userInfo } = response.data.user;
             
             setProgress({ value: '', disabled: false });
-  
-            if (userInfo.role === 'Student') {
-              localStorage.setItem('stdInfo', JSON.stringify(userInfo));
-              localStorage.setItem('stdTkn', token);
-              window.location.replace('/student/s/');
-            } else if (userInfo.role === 'Lecturer') {
-              localStorage.setItem('lecInfo', JSON.stringify(userInfo));
-              localStorage.setItem('lecTkn', token);
-              window.location.replace('/lecturer/l/');
-            } else if (userInfo.role === 'Hod/Dean') {
-              localStorage.setItem('hodInfo', JSON.stringify(userInfo));
-              localStorage.setItem('hodTkn', token);
-              window.location.replace('/hod/h/');
-            } else if (userInfo.role === 'Registration officer') {
-              localStorage.setItem('regInfo', JSON.stringify(userInfo));
-              localStorage.setItem('regTkn', token);
-              window.location.replace('/reg/r/');
-            } else if (userInfo.role === 'Accountant') {
-              localStorage.setItem('accInfo', JSON.stringify(userInfo));
-              localStorage.setItem('accTkn', token);
-              window.location.replace('/acc/a/');
-            } else if (userInfo.role === 'Director of student discipline') {
-              localStorage.setItem('dodInfo', JSON.stringify(userInfo));
-              localStorage.setItem('dodTkn', token);
-              window.location.replace('/dsd/d/');
-            } else if (userInfo.role === 'Examination officer') {
-              localStorage.setItem('exoInfo', JSON.stringify(userInfo));
-              localStorage.setItem('exoTkn', token);
-              window.location.replace('/exo/e/');
-            }
+            localStorage.setItem('admnInfo', JSON.stringify(userInfo));
+            localStorage.setItem('admnTkn', token);
+            window.location.replace('/admin/');
           }
         }, 2000); 
       })
@@ -113,21 +82,13 @@ const Signin = () => {
   return (
     <AuthenticationPageContainer>
       <Helmet>
-        <title>{sysUser} Sign In - Exam make up.</title>
-        <meta name="description" content={`${sysUser} sign in for exam make up.`} /> 
+        <title>Sign In - Admin </title>
+        <meta name="description" content={`Admin sign in form.`} /> 
       </Helmet>
       <InnerContainer>
-        <h2 style={{ textAlign: 'center' }}>{sysUser.toUpperCase()} SIGN IN</h2>
+        <h2 style={{ textAlign: 'center' }}>ADMIN SIGN IN</h2>
         <AuthFormContainer onSubmit={submitForm}>
-          { params.userType === 'std' ? 
-            <>
-              <TextField id="filled-basic" sx={{ m: 1, width: '40ch' }} size='small' label="Registration number" variant="filled" name='registrationNumber' value={formData.registrationNumber || ''} onChange={handleChange}/>
-            </>
-            :
-            <>
-              <TextField id="filled-basic" sx={{ m: 1, width: '40ch' }}  size='small' label="email" variant="filled" name='email' value={formData.email || ''} onChange={handleChange}/>
-            </>
-          }
+          <TextField id="filled-basic" sx={{ m: 1, width: '40ch' }}  size='small' label="email" variant="filled" name='email' value={formData.email || ''} onChange={handleChange}/>
           <FormControl variant="filled">
             <InputLabel htmlFor="filled-adornment-password">Password</InputLabel>
             <FilledInput id="filled-adornment-password" type={showPassword ? 'text' : 'password'} size='small' name='password' value={formData.password || ''} onChange={handleChange}

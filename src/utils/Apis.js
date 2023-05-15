@@ -6,8 +6,7 @@ const mainAddress =  `http://${BACKEND_DOMAIN || 'localhost'}:${BACKEND_PORT}/ap
 
 let Apis = {
     userApis: {
-        signInAsStudent: `${mainAddress}/user/studentSignIn`,
-        signInAsOtherUser: `${mainAddress}/user/signin`,
+        signIn: `${mainAddress}/user/signin`,
         signUp:`${mainAddress}/user/signup`,
         requestPasswordReset: `${mainAddress}/user/requestPasswordReset`,
         resetPassword: `${mainAddress}/user/resetPassword?id=`,

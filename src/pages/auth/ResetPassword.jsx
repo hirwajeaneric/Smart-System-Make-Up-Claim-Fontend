@@ -20,11 +20,8 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-// THIS FORM WILL BE USED BY ALL USERS. IT IS DINAMIC AND THEREBY SETS INPUT ACCORDING TO THE KIND OF URL A USER ENTERED.
+
 const ResetPassword = () => {
-  // Hooks
-  const params = useParams();
-  
   // States
   const [showPassword, setShowPassword] = React.useState(false);
   const [formData, setFormData] = useState({ password: '' });
