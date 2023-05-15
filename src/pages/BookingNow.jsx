@@ -3,12 +3,12 @@ import { Helmet } from 'react-helmet-async'
 import { NavLink } from 'react-router-dom'
 import { SimpleTopNavigation, Banner } from '../components/styled-components/landingPageComponents';
 
-const ErrorPage = () => {
+const BookingNow = () => {
   return (
     <div>
       <Helmet>
-        <title>404 - Page not found.</title>
-        <meta name="description" content="Page not found."/>
+        <title>Welcome to VSBA.</title>
+        <meta name="description" content="Book a slot with  VSBA."/>
       </Helmet>
       <SimpleTopNavigation>
         <ul>
@@ -18,11 +18,10 @@ const ErrorPage = () => {
         </ul>
       </SimpleTopNavigation>
       <Banner>
-        <h1>404</h1>
-        <h2>Page not found</h2>
+        <h1>Book your slot now.</h1>
       </Banner>
     </div>
   )
 }
 
-export default ErrorPage
+export default BookingNow

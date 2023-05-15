@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const A = styled.div`
+export const Banner = styled.div`
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -20,7 +20,7 @@ export const A = styled.div`
     }
 `;
 
-export const B = styled.div`
+export const SimpleTopNavigation = styled.div`
 
     @media (max-width: 1080px) {
             
@@ -35,7 +35,7 @@ export const B = styled.div`
     }
 `;
 
-export const C = styled.div`
+export const Services = styled.div`
 
     @media (max-width: 1080px) {
             
@@ -50,7 +50,7 @@ export const C = styled.div`
     }
 `;
 
-export const D = styled.div`
+export const ServicesContainer = styled.div`
 
     @media (max-width: 1080px) {
             
@@ -65,7 +65,7 @@ export const D = styled.div`
     }
 `;
 
-export const E = styled.div`
+export const AService = styled.div`
 
     @media (max-width: 1080px) {
             

@@ -45,6 +45,7 @@ function App() {
         <Routes>
           <Route path='/' element={<StartingPage />}>
             <Route path='/' element={<LandingPage />} />
+            <Route path='/book-now' element={<ErrorPage />} />
             <Route path='*' element={<ErrorPage />} />
           </Route>
 
