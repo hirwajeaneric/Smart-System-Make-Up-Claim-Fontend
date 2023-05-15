@@ -1,6 +1,6 @@
 import { Button, TextField } from '@mui/material';
-import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { AuthenticationPageContainer, AuthFormContainer, InnerContainer } from '../../components/styled-components/authenticationPages'
 import Apis from '../../utils/Apis';
 
@@ -13,14 +13,10 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-// THIS FORM WILL BE USED BY ALL USERS. IT IS DINAMIC AND THEREBY SETS INPUT ACCORDING TO THE KIND OF URL A USER ENTERED.
 const RequestPasswordReset = () => {
-  // Hooks
-  const params = useParams();
   
   // States
-  const [sysUser, setSysUser] = useState('');
-  const [formData, setFormData] = useState({ email: '', role: '' });
+  const [formData, setFormData] = useState({ email: '', role: 'admin' });
   const [progress, setProgress] = useState({ value: '', disabled: false});
   const [open, setOpen] = useState(false);
   const [responseMessage, setResponseMessage] = useState({ message: '', severity: ''})
@@ -32,24 +28,6 @@ const RequestPasswordReset = () => {
     setOpen(false);
   };
 
-  useEffect(() => {
-    if (params.userType === 's') {
-      setSysUser('Student');
-    } else if (params.userType === 'l') {
-      setSysUser('Lecturer');
-    } else if (params.userType === 'h') {
-      setSysUser('Hod/Dean');
-    } else if (params.userType === 'r') {
-      setSysUser('Registration officer');
-    } else if (params.userType === 'e') {
-      setSysUser('Examination officer');
-    } else if (params.userType === 'd') {
-      setSysUser('Director of student discipline');
-    } else if (params.userType === 'a') {
-      setSysUser('Accountant');
-    }
-  },[params.userType])
-
   // Functions
   const handleChange = ({currentTarget: input}) => { setFormData({...formData, [input.name]: input.value}) };
   
@@ -58,37 +36,11 @@ const RequestPasswordReset = () => {
     e.preventDefault();
     const data = {};
 
-    const { email } = formData;
-    
     // Setting up the url to call
     var link = Apis.userApis.requestPasswordReset;
     
-    //  Setting user data according to users
-    if (params.userType === 's') {
-      data.email = email
-      data.role = sysUser;  
-    } else if (params.userType === 'l') {
-      data.email = email
-      data.role = sysUser;
-    } else if (params.userType === 'h') {
-      data.email = email
-      data.role = sysUser;
-    } else if (params.userType === 'r') {
-      data.email = email
-      data.role = sysUser;
-    } else if (params.userType === 'e') {
-      data.email = email
-      data.role = sysUser;
-    } else if (params.userType === 'd') {
-      data.email = email
-      data.role = sysUser;
-    } else if (params.userType === 'a') {
-      data.email = email
-      data.role = sysUser;
-    } 
-
     // Validation 
-    if (data.email === '') {
+    if (formData.email === '') {
       setResponseMessage({ message: 'Email must be provided', severity: 'error' });
       setOpen(true);
       return;
@@ -96,7 +48,7 @@ const RequestPasswordReset = () => {
       // Set progress message
       setProgress({ value: 'Sending request ...', disabled: true});
       // Api call
-      axios.post(link, data)
+      axios.post(link, formData)
       .then(response => {
         setTimeout(()=>{
           if (response.status === 200) {
@@ -123,8 +75,8 @@ const RequestPasswordReset = () => {
   return (
     <AuthenticationPageContainer>
       <Helmet>
-        <title>{sysUser} Forgot password - Exam make up.</title>
-        <meta name="description" content={`${sysUser} sign in for exam make up.`} /> 
+        <title>Forgot password - Admin</title>
+        <meta name="description" content={`Admin forgot password page.`} /> 
       </Helmet>
       <InnerContainer>
         <h2 style={{ textAlign: 'center' }}>FORGOT PASSWORD</h2>
