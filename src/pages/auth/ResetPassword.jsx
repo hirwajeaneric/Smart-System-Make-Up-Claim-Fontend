@@ -22,6 +22,8 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 
 const ResetPassword = () => {
+  const params = useParams();
+  
   // States
   const [showPassword, setShowPassword] = React.useState(false);
   const [formData, setFormData] = useState({ password: '' });
@@ -73,7 +75,7 @@ const ResetPassword = () => {
           }
         }, 2000); 
         setTimeout(()=>{
-          window.location.replace('../../signin');
+          window.location.replace('../signin');
         },2000);
       })
       .catch(error => {
@@ -89,15 +91,15 @@ const ResetPassword = () => {
   return (
     <AuthenticationPageContainer>
       <Helmet>
-        <title>Change password - Exam make up.</title>
-        <meta name="description" content={`User reset password`} /> 
+        <title>Reset password - Admin.</title>
+        <meta name="description" content={`Admin reset password`} /> 
       </Helmet>
 
       <InnerContainer>
-        <h2 style={{ textAlign: 'center' }}>CHANGE PASSWORD</h2>
+        <h2 style={{ textAlign: 'center' }}>RESET PASSWORD</h2>
         <AuthFormContainer onSubmit={submitForm}>
           <FormControl variant="filled">
-            <InputLabel htmlFor="filled-adornment-password">Password</InputLabel>
+            <InputLabel htmlFor="filled-adornment-password">New Password</InputLabel>
             <FilledInput id="filled-adornment-password" type={showPassword ? 'text' : 'password'} size='small' name='password' value={formData.password || ''} onChange={handleChange}
               endAdornment={<InputAdornment position="end"><IconButton aria-label="toggle password visibility"onClick={handleClickShowPassword} onMouseDown={handleMouseDownPassword} edge="end">{showPassword ? <VisibilityOff /> : <Visibility />}</IconButton></InputAdornment>}
             />

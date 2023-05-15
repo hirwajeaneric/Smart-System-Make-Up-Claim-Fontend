@@ -24,7 +24,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 const Signup = () => {  
   // States
   const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState({ fullName: '', email: '', phone: '', role: 'Admin', password: '' });
+  const [formData, setFormData] = useState({ fullName: '', email: '', phone: '', role: 'admin', password: '' });
   const [progress, setProgress] = useState({ value: '', disabled: false});
   const [open, setOpen] = useState(false);
   const [responseMessage, setResponseMessage] = useState({ message: '', severity: ''});
