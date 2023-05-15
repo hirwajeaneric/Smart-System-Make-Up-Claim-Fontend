@@ -14,6 +14,12 @@ import Signin from '../pages/auth/Signin';
 import ResetPassword from '../pages/auth/ResetPassword';
 import RequestPasswordReset from '../pages/auth/RequestPasswordReset';
 
+import ClientAuthentincationPage from '../pages/auth';
+import ClientSignup from '../pages/auth/Signup';
+import ClientSignin from '../pages/auth/Signin';
+import ClientResetPassword from '../pages/auth/ResetPassword';
+import ClientRequestPasswordReset from '../pages/auth/RequestPasswordReset';
+
 // Admin Pages 
 import Admin from '../pages/users/Admin/Index';
 import AdminHome from '../pages/users/Admin/Home';
@@ -56,6 +62,14 @@ function App() {
           
           {/* Student Pages */}
           <Route path={'client'} element={localStorage.getItem("cltTkn") ? <Client /> : <Navigate replace to='/client/auth/signin' />} >
+            <Route path='/auth' element={<AuthentincationPage />}>
+              <Route path='' element={<Signin />} />
+              <Route path='signin' element={<Signin />} />
+              <Route path='signup' element={<Signup />} />
+              <Route path='forgot-password' element={<RequestPasswordReset />} />
+              <Route path='reset-password/:token/:userId' element={<ResetPassword />} />
+            </Route>
+
             <Route path='' element={localStorage.getItem("cltTkn") ? <ClientHome /> : <Navigate replace to='/client/auth/signin' />} />
             <Route path='settings' element={localStorage.getItem("cltTkn") ? <ClientSettings /> : <Navigate replace to='/client/auth/signin' />} />
             <Route path='booking/:id' element={localStorage.getItem("cltTkn") ? <ClientBookingDetails /> : <Navigate replace to='/client/auth/signin' />} />
