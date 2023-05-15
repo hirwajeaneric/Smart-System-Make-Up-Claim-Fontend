@@ -11,7 +11,6 @@ let Apis = {
         requestPasswordReset: `${mainAddress}/user/requestPasswordReset`,
         resetPassword: `${mainAddress}/user/resetPassword?id=`,
         updateUserAccount: `${mainAddress}/user/update?id=`,
-        findByRegistrationNumber: `${mainAddress}/user/findByRegistrationNumber?registrationNumber=`,
         findById: `${mainAddress}/user/findById?id=`,
         findByRole: `${mainAddress}/user/findByRole?role=`,
         list: `${mainAddress}/user/list`,
