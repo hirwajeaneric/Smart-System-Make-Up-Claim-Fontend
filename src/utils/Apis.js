@@ -1,8 +1,8 @@
 // const BACKEND_DOMAIN = '';
-const BACKEND_PORT = '5555'
-// const BACKEND_PORT = ''
+const BACKEND_PORT = '5151';
+// const BACKEND_PORT = '';
 const BACKEND_DOMAIN = '192.168.43.16';
-const mainAddress =  `http://${BACKEND_DOMAIN || 'localhost'}:${BACKEND_PORT}/api/v1/ssmec`
+const mainAddress =  `http://${BACKEND_DOMAIN || 'localhost'}:${BACKEND_PORT}/api/v1/vsb/`;
 
 let Apis = {
     userApis: {
@@ -17,12 +17,25 @@ let Apis = {
         findByRole: `${mainAddress}/user/findByRole?role=`,
         list: `${mainAddress}/user/list`,
     },
-    claimApis: {
-        
+    bookingApis: {
+        createNew: `${mainAddress}/booking/add`,
+        update: `${mainAddress}/booking/update?id=`,
+        delete: `${mainAddress}/booking/delete?id=`,
+        list: `${mainAddress}/booking/list`,
+        findById: `${mainAddress}/booking/findById?id=`,
+        findByCancelDate: `${mainAddress}/booking/findByCancelDate=`,
+        findByStatus: `${mainAddress}/booking/findByStatus?status=`,
+        findByDuration: `${mainAddress}/booking/findByDuration?duration=`,
+        findByEndDate: `${mainAddress}/booking/findByEndDate?endDate=`,
+        findBySlotNumber: `${mainAddress}/booking/findBySlotNumber?slotNumber=`,
+        findByStartHour: `${mainAddress}/booking/findByStartHour?startHour=`,
+        findByTypeOfService: `${mainAddress}/booking/findByTypeOfService?typeOfService=`,
+        findByWorkStatus: `${mainAddress}/booking/findByWorkStatus?workStatus=`,
+        findByClientConfirmation: `${mainAddress}/booking/findByClientConfirmation?clientConfirmation=`,
     },
-    courseApis: {
-        listAllCourses: `${mainAddress}/course/list`,
-        findByDepartment: `${mainAddress}/course/findByDepartment?department=`,
+    scheduleApis: {
+        listAllCourses: `${mainAddress}/schedule/list`,
+        findByDepartment: `${mainAddress}/schedule/findByDepartment?department=`,
         findByFaculty: `${mainAddress}/course/findByFaculty?faculty=`,
         findByCode: `${mainAddress}/course/findByCode?code=`,
         findByLecturerId: `${mainAddress}/course/findByLecturerId?lecturerId=`,

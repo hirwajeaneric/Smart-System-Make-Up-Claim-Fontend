@@ -44,7 +44,7 @@ function App() {
           </Route>
 
           {/* Authentication routes */}
-          <Route path='/:user/:userType/auth' element={<AuthentincationPage />}>
+          <Route path='/admin/auth' element={<AuthentincationPage />}>
             <Route path='' element={<Signin />} />
             <Route path='signin' element={<Signin />} />
             <Route path='signup' element={<Signup />} />

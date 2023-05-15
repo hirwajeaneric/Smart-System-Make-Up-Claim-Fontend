@@ -20,7 +20,6 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-// THIS FORM WILL BE USED BY ALL USERS. IT IS DINAMIC AND THEREBY SETS INPUT ACCORDING TO THE KIND OF URL A USER ENTERED.
 const Signin = () => {
   // Hooks
   const params = useParams();
@@ -40,24 +39,6 @@ const Signin = () => {
     setOpen(false);
   };
 
-  useEffect(() => {
-    if (params.userType === 's') {
-      setSysUser('Student');
-    } else if (params.userType === 'l') {
-      setSysUser('Lecturer');
-    } else if (params.userType === 'h') {
-      setSysUser('Hod/Dean');
-    } else if (params.userType === 'r') {
-      setSysUser('Registration officer');
-    } else if (params.userType === 'e') {
-      setSysUser('Examination officer');
-    } else if (params.userType === 'd') {
-      setSysUser('Director of student discipline');
-    } else if (params.userType === 'a') {
-      setSysUser('Accountant');
-    }
-  },[params.userType])
-
   // Functions
   const handleChange = ({currentTarget: input}) => { setFormData({...formData, [input.name]: input.value}) };
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -65,60 +46,15 @@ const Signin = () => {
 
   const submitForm = (e) => {
     e.preventDefault();
-    const data = {};
-
-    const { email, registrationNumber, password } = formData;
     
-    var link = '';
-    if (params.userType === 's') {
-      data.registrationNumber = parseInt(registrationNumber);
-      data.role = sysUser;
-      link = Apis.userApis.signInAsStudent  
-    } else if (params.userType === 'l') {
-      data.email = email
-      data.role = sysUser;
-      link = Apis.userApis.signInAsOtherUser;
-    } else if (params.userType === 'h') { 
-      data.email = email
-      data.role = sysUser;
-      link = Apis.userApis.signInAsOtherUser;
-    } else if (params.userType === 'r') {
-      data.email = email
-      data.role = sysUser;
-      link = Apis.userApis.signInAsOtherUser;
-    } else if (params.userType === 'e') {
-      data.email = email
-      data.role = sysUser;
-      link = Apis.userApis.signInAsOtherUser;
-    } else if (params.userType === 'd') {
-      data.email = email
-      data.role = sysUser;
-      link = Apis.userApis.signInAsOtherUser;
-    } else if (params.userType === 'a') {
-      data.email = email
-      data.role = sysUser;
-      link = Apis.userApis.signInAsOtherUser;
-    } 
-    data.password = password;
-    
-    if (sysUser === 'Student' && (data.registrationNumber.toString().length === 0)) {
-      setResponseMessage({ message: 'Registration number must be provided', severity: 'error' });
-      setOpen(true);
-      return;
-    } if (data.role === 'Student' && (data.registrationNumber.toString().length < 5 || data.registrationNumber.toString().length > 5)  ) {
-      setResponseMessage({ message: 'Registration number must be 5 digits long', severity: 'error' });
-      setOpen(true);
-      return;
-    } else if (data.role === 'Student' && typeof data.registrationNumber !== 'number') {
-      setResponseMessage({ message: 'Registration number must contain digits only', severity: 'error' });
-      setOpen(true);
-      return;
-    } else if (data.role !== 'Student' && data.email.length === 0) {
+    const { email, password } = formData;
+     
+    if (!email) {
       setResponseMessage({ message: 'Email address must be provided.', severity: 'error' });
       setOpen(true);
       return;
-    } else if (data.role !== 'Student' && typeof data.email !== 'string') {
-      setResponseMessage({ message: 'Wrong input.', severity: 'error' });
+    } else if (!password) {
+      setResponseMessage({ message: 'Password is required.', severity: 'error' });
       setOpen(true);
       return;
     } else {
