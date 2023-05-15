@@ -6,10 +6,10 @@ const Report = () => {
   return (
     <Page>
       <Helmet>
-        <title>Report preview - Administrator</title>
-        <meta name="description" content="Administrator's report preview page."/> 
+        <title>Book details - More info about your booking</title>
+        <meta name="description" content="More details about a booking made by the client."/> 
       </Helmet>
-      Report
+      Booking details
     </Page>
   )
 }

@@ -1,11 +1,15 @@
 import React from 'react'
+import { Page } from '../../../components/styled-components/pageStyledComponents'
+import { Helmet } from 'react-helmet-async'
 
-const Home = () => {
+export default function NewBooking() {
   return (
-    <div>
-      <h1>Welcome to VSBS.</h1>
-    </div>
+    <Page>
+      <Helmet>
+        <title>Your VSBA account status</title>
+        <meta name="description" content="User home account in their Vehicle Servicing Booking Application."/> 
+      </Helmet>
+      My account
+    </Page>
   )
 }
-
-export default Home

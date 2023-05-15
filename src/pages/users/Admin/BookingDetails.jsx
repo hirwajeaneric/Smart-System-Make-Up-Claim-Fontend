@@ -2,14 +2,16 @@ import React from 'react'
 import { Page } from '../../../components/styled-components/pageStyledComponents'
 import { Helmet } from 'react-helmet-async'
 
-export default function Settings() {
+const Report = () => {
   return (
     <Page>
       <Helmet>
-        <title>User account settings</title>
-        <meta name="description" content="User account settings."/> 
+        <title>Book details - Administrator</title>
+        <meta name="description" content="Administrator's booking details page."/> 
       </Helmet>
-      Settings
+      Booking details
     </Page>
   )
 }
+
+export default Report

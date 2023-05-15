@@ -6,7 +6,7 @@ const Settings = () => {
   return (
     <Page>
       <Helmet>
-        <title>Administrator - Account settings</title>
+        <title>Account settings - Administrator</title>
         <meta name="description" content="Administrator's user account settings page."/> 
       </Helmet>
       Settings
